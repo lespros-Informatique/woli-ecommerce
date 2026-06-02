@@ -1,8 +1,8 @@
 /* ================================================================================
-   == MOBILE LAYOUTS (max-width: 1023px) ==
-   ================================================================================ */
+    == MOBILE LAYOUTS (max-width: 767px) ==
+    ================================================================================ */
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
    
    /* Hide desktop-only elements */
    .desktop-only {
@@ -461,6 +461,10 @@
 /* Categories Scroll Mobile */
   .categories-scroll__track {
     gap: var(--space-xs);
+
+    display: flex;
+    overflow-x: auto;
+    padding: var(--space-xs) 0;
   }
 
   .category-card-small {
