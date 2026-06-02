@@ -8,7 +8,8 @@
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/web.css" media="screen and (min-width: 768px)">
+  <link rel="stylesheet" href="css/web.css" media="screen and (min-width: 1024px)">
+  <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px) and (max-width: 1023px)">
   <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 767px)">
 
   <!-- Scripts -->
@@ -164,188 +165,79 @@
     <button class="btn btn-primary" style="padding:10px var(--space-md); min-height:42px;" onclick="document.querySelector('.js-mobile-search-drawer').classList.remove('open');">Fermer</button>
   </div>
 
-  <!-- ================================================================================
-     == MAIN HERO BANNER ==
-     ================================================================================ -->
-  <section class="hero" aria-label="Offre Vedette">
+<!-- ================================================================================
+      == MAIN HERO BANNER - Style Alibaba ==
+      ================================================================================ -->
+  <section class="hero-alibaba" aria-label="Offres et Catégories">
     <div class="container">
-      <div class="hero__content">
-        <h1 class="hero__title">Modernisez votre E-Commerce avec Woli</h1>
-        <p class="hero__subtitle">Des produits sélectionnés auprès des meilleurs fournisseurs locaux et internationaux au meilleur prix d'Afrique de l'Ouest.</p>
-        <a href="#shop-section" class="btn btn-primary hero__btn" id="hero-cta-btn">Découvrir la boutique</a>
+      <!-- Announcement Slider -->
+      <div class="hero-alibaba__slider">
+        <div class="announcement-slider js-announcement-slider">
+          <div class="announcement-slide active">
+            <span class="badge badge-promo" style="margin-right:8px;">-30%</span>
+            <span>Soldes jusqu'à -50%</span>
+          </div>
+          <div class="announcement-slide">
+            <span class="badge badge-new" style="margin-right:8px;">Nouveau</span>
+            <span>Livraison gratuite dès 50 000 FCFA</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ================================================================================
-     == MAIN CONTENT ==
-     ================================================================================ -->
+      == CATEGORIES SCROLLABLE HORIZONTAL - Cards ==
+      ================================================================================ -->
+  <section class="categories-scroll section" aria-label="Catégories">
+    <div class="container">
+      <div class="categories-scroll__track">
+        <div class="category-card-small js-filter-category" data-cat="CAT01">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200" alt="Électronique" class="category-card-small__image">
+          <span class="category-card-small__label">Électronique</span>
+        </div>
+        <div class="category-card-small js-filter-category" data-cat="CAT02">
+          <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200" alt="Vêtements" class="category-card-small__image">
+          <span class="category-card-small__label">Vêtements</span>
+        </div>
+        <div class="category-card-small js-filter-category" data-cat="CAT03">
+          <img src="https://images.unsplash.com/photo-1517256064527-09c53b2d0bc6?w=200" alt="Maison" class="category-card-small__image">
+          <span class="category-card-small__label">Maison</span>
+        </div>
+        <div class="category-card-small js-filter-category" data-cat="CAT04">
+          <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=200" alt="Beauté" class="category-card-small__image">
+          <span class="category-card-small__label">Beauté</span>
+        </div>
+        <div class="category-card-small js-filter-category" data-cat="new">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200" alt="Nouveautés" class="category-card-small__image">
+          <span class="category-card-small__label">Nouveautés</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ================================================================================
+      == RECOMMENDED PRODUCTS SECTION ==
+      ================================================================================ -->
   <main class="container section" id="main-content">
-    
-    <!-- Mobile triggers bar for filters drawer -->
-    <div class="mobile-filters-trigger-bar mobile-only">
-      <button class="mobile-trigger-btn js-filter-trigger" id="mobile-filter-open-btn">
-        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-        Filtrer & Trier
-      </button>
-      <button class="mobile-trigger-btn" onclick="activeFilters.stock = activeFilters.stock === 'all' ? 'disponible' : 'all'; renderProducts(); this.classList.toggle('btn-primary');">
-        En Stock Uniquement
-      </button>
-    </div>
-
-    <!-- Shop Grid Layout -->
-    <div class="shop-layout" id="shop-section">
-      
-      <!-- Backdrop for mobile drawer sidebar -->
-      <div class="sidebar-backdrop js-sidebar-backdrop"></div>
-
-      <!-- SIDEBAR FILTERS (Sticky on Desktop, slide-drawer on Mobile) -->
-      <aside class="sidebar js-sidebar" aria-label="Filtres de produits">
-        <div class="sidebar__header mobile-only">
-          <h2 class="sidebar__title" style="margin-bottom:0;">Filtres Woli</h2>
-          <button class="sidebar__close-btn js-close-filter" aria-label="Fermer les filtres">×</button>
+  <section class="products-section section" id="recommended-section">
+    <div class="container">
+      <div class="products-section__header">
+        <h2 class="section-title">Recommandés</h2>
+        <div class="products-filter-tabs">
+          <button class="products-filter-tab active" data-filter="all">Tous</button>
+          <button class="products-filter-tab" data-filter="Nouveau">Nouveautés</button>
+          <button class="products-filter-tab" data-filter="Best-Seller">Tendances</button>
+          <button class="products-filter-tab" data-filter="Promo">Promos</button>
         </div>
-
-        <div class="sidebar__content">
-          <!-- Categories Filter -->
-          <div class="sidebar__section">
-            <h3 class="sidebar__title">Catégories</h3>
-            <ul class="filter-list">
-              <li class="filter-item">
-                <label>
-                  <input type="checkbox" value="CAT01" class="js-cat-filter"> Électronique
-                </label>
-              </li>
-              <li class="filter-item">
-                <label>
-                  <input type="checkbox" value="CAT02" class="js-cat-filter"> Vêtements & Mode
-                </label>
-              </li>
-              <li class="filter-item">
-                <label>
-                  <input type="checkbox" value="CAT03" class="js-cat-filter"> Maison & Déco
-                </label>
-              </li>
-              <li class="filter-item">
-                <label>
-                  <input type="checkbox" value="CAT04" class="js-cat-filter"> Cosmétique & Beauté
-                </label>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Price Range Slider -->
-          <div class="sidebar__section">
-            <h3 class="sidebar__title">Prix Maximum</h3>
-            <div class="range-container">
-              <div class="range-inputs">
-                <input type="number" class="js-min-price-input" value="1000" aria-label="Prix minimum" readonly>
-                <span style="color:var(--text-muted);">à</span>
-                <input type="number" class="js-max-price-input" value="50000" aria-label="Prix maximum" readonly>
-              </div>
-              <input type="range" min="1000" max="50000" step="1000" value="50000" class="range-slider js-range-slider" id="price-slider-input" aria-label="Curseur de prix">
-              <span class="range-label js-range-label">1 000 FCFA - 50 000 FCFA</span>
-            </div>
-          </div>
-
-          <!-- Stock Status -->
-          <div class="sidebar__section">
-            <h3 class="sidebar__title">Disponibilité</h3>
-            <ul class="filter-list">
-              <li class="filter-item">
-                <label>
-                  <input type="radio" name="filter-stock" value="all" checked> Tout
-                </label>
-              </li>
-              <li class="filter-item">
-                <label>
-                  <input type="radio" name="filter-stock" value="disponible"> En Stock
-                </label>
-              </li>
-              <li class="filter-item">
-                <label>
-                  <input type="radio" name="filter-stock" value="faible"> Dernières Pièces
-                </label>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Supplier/Fournisseur with local search -->
-          <div class="sidebar__section">
-            <h3 class="sidebar__title">Fournisseurs</h3>
-            <input type="text" placeholder="Rechercher un fournisseur..." class="supplier-search js-supplier-search" aria-label="Rechercher un fournisseur">
-            <ul class="filter-list" id="supplier-filter-list">
-              <li class="filter-item js-supplier-item">
-                <label>
-                  <input type="checkbox" value="FOU01" class="js-sup-filter"> <span>Afrimarket Sarl</span>
-                </label>
-              </li>
-              <li class="filter-item js-supplier-item">
-                <label>
-                  <input type="checkbox" value="FOU02" class="js-sup-filter"> <span>Sahel Import</span>
-                </label>
-              </li>
-              <li class="filter-item js-supplier-item">
-                <label>
-                  <input type="checkbox" value="FOU03" class="js-sup-filter"> <span>Babi Mode</span>
-                </label>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Action buttons for filtering -->
-          <div class="sidebar__actions">
-            <button class="btn btn-primary js-apply-filters" id="apply-filters-btn">Appliquer les filtres</button>
-            <button class="btn btn-secondary js-reset-filters" id="reset-filters-btn">Réinitialiser</button>
-          </div>
-        </div>
-      </aside>
-
-      <!-- PRODUCT LIST GRID -->
-      <section style="flex-grow:1;" aria-label="Liste des produits">
-        <div class="product-grid js-product-grid" id="product-grid-container">
-          <!-- Populated dynamically via JS -->
-        </div>
-
-        <!-- Pagination -->
-        <nav class="pagination" aria-label="Pagination des produits">
-          <button class="pagination__btn" aria-label="Page précédente" onclick="showToast('Page précédente (simulation)', 'info')">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-          </button>
-          <button class="pagination__btn pagination__btn--active">1</button>
-          <button class="pagination__btn" onclick="showToast('Page 2 (simulation)', 'info')">2</button>
-          <button class="pagination__btn" onclick="showToast('Page 3 (simulation)', 'info')">3</button>
-          <button class="pagination__btn" aria-label="Page suivante" onclick="showToast('Page suivante (simulation)', 'info')">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </button>
-        </nav>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- ================================================================================
-     == BENEFITS / FEATURES SECTION ==
-     ================================================================================ -->
-  <section class="benefits section" aria-label="Nos avantages">
-    <div class="container benefits-grid">
-      <div class="benefit-item">
-        <div class="benefit-item__icon">🚚</div>
-        <h3 class="benefit-item__title">Livraison Rapide</h3>
-        <p class="benefit-item__text">Vos colis livrés directement à domicile ou en point relais sous 24h à 48h dans toute la sous-région.</p>
       </div>
-      <div class="benefit-item">
-        <div class="benefit-item__icon">🛡️</div>
-        <h3 class="benefit-item__title">Paiement Sécurisé</h3>
-        <p class="benefit-item__text">Payez en toute confiance via Wave, MTN, Orange Money ou à la livraison en espèces.</p>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-item__icon">🤝</div>
-        <h3 class="benefit-item__title">Support Client</h3>
-        <p class="benefit-item__text">Une équipe locale disponible par téléphone et WhatsApp pour vous assister du lundi au samedi.</p>
-      </div>
+      <div class="product-grid js-product-grid" id="product-grid-container"></div>
     </div>
   </section>
+
+  <!-- Backdrop for mobile drawer -->
+  <div class="sidebar-backdrop js-sidebar-backdrop"></div>
+</main>
 
   <!-- ================================================================================
      == FOOTER ==

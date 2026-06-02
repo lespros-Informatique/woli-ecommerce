@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Connexion - Woli E-commerce">
+  <title>Woli | Connexion</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/web.css" media="screen and (min-width: 1024px)">
+  <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px) and (max-width: 1023px)">
+  <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 767px)">
+</head>
+<body class="auth-body">
+  <a href="#main-content" class="skip-link">Passer au contenu</a>
+
+  <header class="navbar desktop-only">
+    <div class="container navbar__container">
+      <a href="index.html" class="navbar__logo-link">
+        <img src="assets/images/woli.png" alt="Woli" class="navbar__logo">
+      </a>
+    </div>
+  </header>
+
+  <header class="mobile-header mobile-only">
+    <a href="index.html" class="mobile-header__logo-link">
+      <img src="assets/images/woli.png" alt="Woli" class="mobile-header__logo">
+    </a>
+  </header>
+
+  <main class="auth-main" id="main-content">
+    <div class="auth-card">
+      <h1 class="auth-title">Connexion</h1>
+      <p class="auth-subtitle">Accédez à votre compte Woli</p>
+
+      <form class="auth-form" id="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="votre@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Se connecter</button>
+      </form>
+
+      <div class="auth-links">
+        <a href="auth.html#register" class="auth-link">Créer un compte</a>
+        <a href="auth.html#forgot" class="auth-link">Mot de passe oublié</a>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-container js-toast-container" aria-live="polite"></div>
+  <script src="js/app.js" defer></script>
+</body></html>
