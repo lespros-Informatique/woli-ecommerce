@@ -394,10 +394,10 @@ function renderProducts() {
             <div class="product-card__stock ${stockClass}">
               <span class="stock-indicator-dot"></span> ${stockLabel}
             </div>
-            <button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
-              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-              Ajouter au panier
-            </button>
+<button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
+               <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 2H4L5 9z"></path></svg>
+               <span>Ajouter au panier</span>
+             </button>
           </div>
         </article>
       `;
@@ -692,27 +692,27 @@ function updateCartUI() {
     const totalItemPrice = price * item.quantity;
     subtotal += totalItemPrice;
 
-    itemsHtml += `
-      <div class="cart-item" data-code="${product.code_produit}">
-        <img src="${product.image_produit}" alt="${product.libelle_produit}" class="cart-item__image">
-        <div class="cart-item__details">
-          <div class="cart-item__title">${product.libelle_produit}</div>
-          <span class="cart-item__supplier">Par ${FOURNISSEURS[product.fournisseur_code].nom}</span>
-          <div class="cart-item__controls">
-            <div class="quantity-selector">
-              <button class="quantity-btn js-qty-dec">-</button>
-              <input type="text" class="quantity-input" value="${item.quantity}" readonly>
-              <button class="quantity-btn js-qty-inc">+</button>
-            </div>
-            <button class="cart-item__remove js-qty-remove">
-              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-              Retirer
-            </button>
-          </div>
-        </div>
-        <div class="price" style="font-size: 14px; margin-left: 8px;">${formatPrice(totalItemPrice)}</div>
-      </div>
-    `;
+itemsHtml += `
+       <div class="cart-item" data-code="${product.code_produit}">
+         <img src="${product.image_produit}" alt="${product.libelle_produit}" class="cart-item__image">
+         <div class="cart-item__details">
+           <div class="cart-item__title">${product.libelle_produit}</div>
+           <span class="cart-item__supplier">Par ${FOURNISSEURS[product.fournisseur_code].nom}</span>
+           <div class="cart-item__controls">
+             <div class="quantity-selector">
+               <button class="quantity-btn js-qty-dec">-</button>
+               <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+               <button class="quantity-btn js-qty-inc">+</button>
+             </div>
+             <button class="cart-item__remove js-qty-remove">
+               <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+               <span>Retirer</span>
+             </button>
+           </div>
+         </div>
+         <div class="price" style="font-size: 14px; margin-left: 8px;">${formatPrice(totalItemPrice)}</div>
+       </div>
+     `;
   });
 
   if (itemsContainer) {
@@ -794,10 +794,10 @@ function openProductModal(code) {
           <div style="margin-bottom: 6px;"><strong>Fournisseur :</strong> ${supplier.nom} (${supplier.local})</div>
           <div style="margin-bottom: 12px;"><strong>Mode logistique :</strong> ${supplier.type === 'Dropshipping' ? 'Dropshipping Direct' : 'Expédié par Woli'}</div>
           
-          <button class="btn btn-primary js-modal-add-to-cart" style="width:100%;" ${prod.statut_stock_produit === 'rupture' ? 'disabled' : ''}>
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-            Ajouter au panier
-          </button>
+<button class="btn btn-primary js-modal-add-to-cart" style="width:100%;" ${prod.statut_stock_produit === 'rupture' ? 'disabled' : ''}>
+             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+             <span>Ajouter au panier</span>
+           </button>
         </div>
       </div>
     </div>
@@ -1108,10 +1108,10 @@ function renderProductCard(prod) {
         <div class="product-card__stock ${stockClass}">
           <span class="stock-indicator-dot"></span> ${stockLabel}
         </div>
-        <button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          Ajouter au panier
-        </button>
+<button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
+           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+           <span>Ajouter au panier</span>
+         </button>
       </div>
     </article>
   `;
