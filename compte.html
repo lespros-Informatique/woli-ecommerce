@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mon Compte - Woli E-commerce">
+  <title>Woli | Mon Compte</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/web.css" media="screen and (min-width: 1024px)">
+  <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px) and (max-width: 1023px)">
+  <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 767px)">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Passer au contenu</a>
+
+  <header class="navbar desktop-only">
+    <div class="container navbar__container">
+      <a href="index.html" class="navbar__logo-link">
+        <img src="assets/images/woli.png" alt="Woli" class="navbar__logo">
+      </a>
+      <nav>
+        <ul class="navbar__nav">
+          <li class="navbar__item"><a href="index.html" class="navbar__link">Accueil</a></li>
+          <li class="navbar__item"><a href="categorie.html" class="navbar__link">Boutique</a></li>
+        </ul>
+      </nav>
+      <div class="navbar__actions">
+        <button class="btn-icon js-cart-trigger" aria-label="Panier">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          <span class="navbar__badge js-cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <header class="mobile-header mobile-only">
+    <a href="index.html" class="mobile-header__logo-link">
+      <img src="assets/images/woli.png" alt="Woli" class="mobile-header__logo">
+    </a>
+    <button class="btn-icon js-cart-trigger" aria-label="Panier">
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+      </svg>
+      <span class="navbar__badge js-cart-count">0</span>
+    </button>
+  </header>
+
+  <main class="container section" id="main-content">
+    <div class="account-layout">
+      <aside class="account-sidebar desktop-only">
+        <nav class="account-nav">
+          <a href="#profil" class="account-nav__item account-nav__item--active">Profil</a>
+          <a href="#commandes" class="account-nav__item">Mes Commandes</a>
+          <a href="#adresses" class="account-nav__item">Adresses</a>
+          <a href="#favoris" class="account-nav__item">Favoris</a>
+          <a href="#paiements" class="account-nav__item">Paiements</a>
+          <a href="auth.html" class="account-nav__item">Déconnexion</a>
+        </nav>
+      </aside>
+
+      <div class="account-content">
+        <div class="account-section" id="profil">
+          <h2 class="section-title">Mes informations</h2>
+          <div class="profile-card">
+            <div class="profile-avatar">
+              <span>JK</span>
+            </div>
+            <div class="profile-info">
+              <h3>Jean Koffi</h3>
+              <p>jean.koffi@email.com</p>
+              <p>+225 07 08 09 10 11</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-section" id="commandes">
+          <h2 class="section-title">Mes Dernières Commandes</h2>
+          <div class="orders-list">
+            <div class="order-card">
+              <div class="order-header">
+                <span class="order-id">CMD-4521</span>
+                <span class="order-status order-status--pending">En livraison</span>
+              </div>
+              <div class="order-body">
+                <span class="order-date">12 mai 2026</span>
+                <span class="order-total">45 200 FCFA</span>
+              </div>
+            </div>
+            <div class="order-card">
+              <div class="order-header">
+                <span class="order-id">CMD-4489</span>
+                <span class="order-status order-status--delivered">Livrée</span>
+              </div>
+              <div class="order-body">
+                <span class="order-date">28 avril 2026</span>
+                <span class="order-total">18 500 FCFA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-section" id="favoris">
+          <h2 class="section-title">Mes Favoris</h2>
+          <div class="product-grid">
+            <article class="product-card">
+              <div class="product-card__image-container">
+                <span class="badge badge-new product-card__badge">Nouveau</span>
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="Produit" class="product-card__image">
+              </div>
+              <div class="product-card__info">
+                <h3 class="product-card__title">Sneakers Woli Urban</h3>
+                <span class="price">29 500 FCFA</span>
+                <button class="btn btn-primary product-card__btn">Ajouter</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-navbar mobile-only" aria-label="Navigation">
+    <a href="index.html" class="bottom-navbar__item">
+      <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+      </svg><span>Accueil</span>
+    </a>
+    <a href="categorie.html" class="bottom-navbar__item">
+      <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V7a2 2 0 00-2-2H7a2 2 0 00-2 2v4"></path>
+      </svg><span>Boutique</span>
+    </a>
+    <a href="#" class="bottom-navbar__item">
+      <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0118 0z"></path>
+      </svg><span>Recherche</span>
+    </a>
+    <a href="#" class="bottom-navbar__item">
+      <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+      </svg><span>Favoris</span>
+    </a>
+    <a href="#" class="bottom-navbar__item js-cart-trigger bottom-navbar__item--active">
+      <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+      </svg><span>Panier</span>
+      <span class="bottom-navbar__badge js-cart-count">0</span>
+    </a>
+  </nav>
+
+  <div class="toast-container js-toast-container" aria-live="polite"></div>
+  <script src="js/app.js" defer></script>
+</body></html>

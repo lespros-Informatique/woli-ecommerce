@@ -130,8 +130,9 @@ let activeFilters = {
   categories: [],
   minPrice: 0,
   maxPrice: 50000,
-  stock: 'all', // 'all', 'disponible', 'faible'
-  suppliers: []
+  stock: 'all',
+  suppliers: [],
+  badge: ''
 };
 
 // --- INITIALIZE ON DOM LOAD ---
@@ -142,6 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCart();
   initModals();
   initPromoBar();
+  initAnnouncementSlider();
+  initProductTabs();
   renderProducts();
 });
 
@@ -316,6 +319,10 @@ function renderProducts() {
       }
       // 5. Suppliers
       if (activeFilters.suppliers.length > 0 && !activeFilters.suppliers.includes(prod.fournisseur_code)) {
+        return false;
+      }
+      // 6. Badge filter
+      if (activeFilters.badge && prod.badge !== activeFilters.badge) {
         return false;
       }
       return true;
@@ -956,6 +963,158 @@ function confirmCheckoutOrder() {
 function closeCheckoutModal() {
   const checkoutModal = document.querySelector('.js-checkout-modal-overlay');
   if (checkoutModal) checkoutModal.classList.remove('modal-overlay--show');
+}
+
+// ================================================================================
+// == ANNOUNCEMENT SLIDER ==
+// ================================================================================
+function initAnnouncementSlider() {
+  const slides = document.querySelectorAll('.announcement-slide');
+  if (slides.length <= 1) return;
+  
+  let currentSlide = 0;
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 4000);
+}
+
+// ================================================================================
+// == PRODUCT FILTER TABS ==
+// ================================================================================
+function initProductTabs() {
+  const tabs = document.querySelectorAll('.products-filter-tab');
+  const chips = document.querySelectorAll('.js-filter-category');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      const filter = tab.textContent.trim();
+      filterProductsByTab(filter);
+    });
+  });
+  
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      
+      const cat = chip.getAttribute('data-cat');
+      if (chip.classList.contains('category-card-small')) {
+        // C'est une carte catégorie petite
+        if (cat === 'all') {
+          activeFilters.categories = [];
+        } else if (cat === 'new') {
+          const filtered = PRODUCTS.filter(p => p.badge === 'Nouveau');
+          renderFilteredProducts(filtered);
+          return;
+        } else {
+          activeFilters.categories = [cat];
+        }
+      } else {
+        // C'est un chip
+        if (cat === 'all') {
+          activeFilters.categories = [];
+        } else if (cat === 'new') {
+          const filtered = PRODUCTS.filter(p => p.badge === 'Nouveau');
+          renderFilteredProducts(filtered);
+          return;
+        } else if (cat === 'Promo') {
+          const filtered = PRODUCTS.filter(p => p.badge === 'Promo');
+          renderFilteredProducts(filtered);
+          return;
+        } else {
+          activeFilters.categories = [cat];
+        }
+      }
+      renderProducts();
+    });
+  });
+}
+
+function filterProductsByTab(filter) {
+  if (filter === 'Tous') {
+    activeFilters.badge = '';
+  } else if (filter === 'Nouveautés') {
+    activeFilters.badge = 'Nouveau';
+  } else if (filter === 'Tendances') {
+    activeFilters.badge = 'Best-Seller';
+  } else if (filter === 'Promos') {
+    activeFilters.badge = 'Promo';
+  }
+  renderProducts();
+}
+
+function renderFilteredProducts(products) {
+  const grid = document.querySelector('.js-product-grid');
+  if (!grid) return;
+  
+  renderSkeletons(grid, 4);
+  setTimeout(() => {
+    grid.innerHTML = products.map(prod => generateProductCard(prod)).join('');
+  }, 600);
+}
+
+function generateProductCard(prod) {
+  return renderProductCard(prod); // Reuse from renderProducts
+}
+
+function renderProductCard(prod) {
+  let stockLabel = 'En stock';
+  let stockClass = 'product-card__stock--disponible';
+  if (prod.statut_stock_produit === 'faible') {
+    stockLabel = 'Dernières pièces';
+    stockClass = 'product-card__stock--faible';
+  } else if (prod.statut_stock_produit === 'rupture') {
+    stockLabel = 'Rupture de stock';
+    stockClass = 'product-card__stock--rupture';
+  }
+
+  let badgeHtml = '';
+  if (prod.badge) {
+    let badgeType = 'badge-promo';
+    if (prod.badge === 'Nouveau') badgeType = 'badge-new';
+    if (prod.badge === 'Best-Seller') badgeType = 'badge-bestseller';
+    badgeHtml = `<span class="badge ${badgeType} product-card__badge">${prod.badge}</span>`;
+  }
+
+  let priceHtml = `<span class="price">${formatPrice(prod.prix_vente_produit)}</span>`;
+  if (prod.badge === 'Promo') {
+    const oldPrice = Math.round(prod.prix_vente_produit * 1.25);
+    priceHtml = `<div class="price"><span>${formatPrice(prod.prix_vente_produit)}</span><span class="price-old">${formatPrice(oldPrice)}</span></div>`;
+  }
+
+  const isDisabled = prod.statut_stock_produit === 'rupture' ? 'disabled' : '';
+
+  return `
+    <article class="product-card" data-code="${prod.code_produit}">
+      ${prod.statut_stock_produit === 'rupture' ? '<div class="product-card__stock--rupture-overlay"></div>' : ''}
+      <div class="product-card__image-container">
+        ${badgeHtml}
+        <button class="product-card__favorite js-favorite" aria-label="Ajouter aux favoris">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+        </button>
+        <img src="${prod.image_produit}" alt="${prod.libelle_produit}" class="product-card__image" loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__title js-open-detail">${prod.libelle_produit}</h3>
+        <span class="product-card__supplier">Par ${FOURNISSEURS[prod.fournisseur_code].nom}</span>
+        <div class="product-card__price-row">
+          ${priceHtml}
+        </div>
+        <div class="product-card__stock ${stockClass}">
+          <span class="stock-indicator-dot"></span> ${stockLabel}
+        </div>
+        <button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          Ajouter au panier
+        </button>
+      </div>
+    </article>
+  `;
 }
 
 // ================================================================================

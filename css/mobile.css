@@ -1,13 +1,13 @@
 /* ================================================================================
-   == MOBILE LAYOUTS (max-width: 767px) ==
+   == MOBILE LAYOUTS (max-width: 1023px) ==
    ================================================================================ */
 
-@media (max-width: 767px) {
-  
-  /* Hide desktop-only elements */
-  .desktop-only {
-    display: none !important;
-  }
+@media (max-width: 1023px) {
+   
+   /* Hide desktop-only elements */
+   .desktop-only {
+     display: none !important;
+   }
 
   body {
     padding-top: 104px; /* Top Promo Bar (40px) + Header Mobile (64px) */
@@ -191,12 +191,12 @@
      ================================================================================ */
   .mobile-search-drawer {
     position: fixed;
-    top: -100%; /* Hidden on top */
+    top: -100%;
     left: 0;
     width: 100%;
     background-color: var(--primary-color);
     padding: var(--space-md);
-    z-index: 998;
+    z-index: 1002;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     transition: top 0.3s ease-in-out;
     display: flex;
@@ -205,11 +205,11 @@
   }
 
   .mobile-search-drawer.open {
-    top: 64px; /* Below navbar */
+    top: 104px; /* Below promo bar + navbar */
   }
-  
+
   .mobile-search-drawer.open.no-promo {
-    top: 64px;
+    top: 64px; /* Below navbar only */
   }
 
   .mobile-search-input-wrapper {
@@ -253,6 +253,19 @@
     overflow-y: auto;
     z-index: 1002;
     display: none;
+  }
+
+  .mobile-autocomplete-results .autocomplete-image {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-autocomplete-results .autocomplete-title {
+    font-size: 12px;
+  }
+
+  .mobile-autocomplete-results .autocomplete-price {
+    font-size: 11px;
   }
 
   /* ================================================================================
@@ -327,9 +340,6 @@
   .hero {
     height: 300px;
     background-color: var(--primary-color);
-    background-image: linear-gradient(rgba(30, 58, 95, 0.85), rgba(30, 58, 95, 0.85)), url('../assets/images/hero-bg.webp');
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     color: #FFFFFF;
@@ -357,12 +367,101 @@
     color: var(--text-muted);
   }
 
-  .hero__btn {
+.hero__btn {
     width: 100%;
   }
 
+  /* Hero Alibaba Mobile */
+  .hero-alibaba {
+    background: var(--primary-color);
+    padding: var(--space-md) 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-alibaba__categories {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-alibaba__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: var(--space-xs);
+  }
+
+  .hero-categories-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .hero-categories-list li a {
+    display: block;
+    padding: 6px var(--space-sm);
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    font-size: 12px;
+    color: var(--text-main);
+    text-decoration: none;
+  }
+
+  .hero-categories-list li a:hover {
+    background: var(--secondary-color);
+    color: #FFFFFF;
+  }
+
+  .hero-alibaba__slider {
+    display: flex;
+    align-items: center;
+  }
+
+  .announcement-slider {
+    width: 100%;
+    height: 50px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-md);
+    font-size: 12px;
+    color: var(--text-main);
+  }
+
+  .announcement-slide {
+    display: none;
+    align-items: center;
+  }
+
+  .announcement-slide.active {
+    display: flex;
+  }
+
+  /* Categories Scroll Mobile */
+  .categories-scroll__track {
+    gap: var(--space-xs);
+  }
+
+  .category-card-small {
+    width: 100px;
+    height: 80px;
+  }
+
+  .category-card-small__label {
+    font-size: 10px;
+  }
+
+  /* Products Filter Tabs Mobile */
+  .products-filter-tabs {
+    width: 100%;
+    justify-content: center;
+  }
+
   /* ================================================================================
-     == SHOP RESPONSIVE LAYOUT ==
+      == SHOP RESPONSIVE LAYOUT ==
      ================================================================================ */
   .shop-layout {
     display: flex;
@@ -402,7 +501,7 @@
     height: 100%;
     background: rgba(0,0,0,0.5);
     backdrop-filter: blur(2px);
-    z-index: 1010;
+    z-index: 1001;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -557,9 +656,7 @@
      == FOOTER MOBILE ==
      ================================================================================ */
   .footer {
-    background-color: var(--primary-color);
-    color: #FFFFFF;
-    padding: var(--space-xl) var(--space-md);
+    display: none;
   }
 
   .footer-grid {
@@ -614,18 +711,66 @@
      == SKELETON / DETAIL MODAL MOBILE ==
      ================================================================================ */
   .product-detail-modal {
+   display: flex;
+   flex-direction: column;
+   gap: var(--space-md);
+ }
+
+ .product-detail-modal__image {
+   aspect-ratio: 4/3;
+ }
+
+ /* Auth mobile */
+ .auth-body {
+   background: var(--bg-secondary);
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .auth-card {
+   background: var(--bg-main);
+   padding: var(--space-lg);
+   width: 100%;
+   max-width: 340px;
+   border-radius: 12px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+  /* Account mobile */
+  .account-layout {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-lg);
   }
 
-  .product-detail-modal__image {
-    aspect-ratio: 4/3;
+  .profile-card {
+    padding: var(--space-md);
+  }
+
+  .profile-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .category-title {
+    font-size: 28px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-detail-page {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 
   /* Toasts center for mobile */
   .toast-container {
-    bottom: 80px; /* above bottom bar */
+    bottom: 80px;
     left: var(--space-md);
     right: var(--space-md);
     align-items: center;

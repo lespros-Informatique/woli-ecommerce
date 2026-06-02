@@ -1,0 +1,73 @@
+/* ================================================================================
+   == TABLET LAYOUTS (768px - 1023px) ==
+   ================================================================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+   
+   /* Navbar Tablet */
+   .navbar {
+     height: 64px;
+     top: 40px;
+   }
+   
+   .navbar__logo {
+     width: 120px;
+     height: 36px;
+   }
+   
+   .navbar__nav {
+     gap: var(--space-lg);
+   }
+   
+   .navbar__link {
+     font-size: 14px;
+     padding: 6px 0;
+   }
+   
+   .search-container {
+     width: 240px;
+   }
+   
+   .search-input {
+     height: 36px;
+     padding: 8px 12px 8px 32px;
+     font-size: 13px;
+   }
+   
+   body {
+     padding-top: 104px;
+   }
+   
+   /* Hero Alibaba Tablet */
+   .hero-alibaba {
+     padding: var(--space-md) 0;
+   }
+   
+   .hero-alibaba__grid {
+     grid-template-columns: 180px 1fr;
+     gap: var(--space-md);
+   }
+   
+   .announcement-slider {
+     height: 60px;
+   }
+   
+   .category-card-small {
+     width: 100px;
+     height: 80px;
+   }
+   
+   /* Shop Layout Tablet */
+   .shop-layout {
+     grid-template-columns: 240px 1fr;
+   }
+   
+   .product-grid {
+     grid-template-columns: repeat(3, 1fr);
+     gap: var(--space-md);
+   }
+   
+   .product-card__image-container {
+     height: 200px;
+   }
+}
