@@ -1,0 +1,680 @@
+TU ES UN EXPERT DÉVELOPPEUR UI/UX DE 16+ ANS SPÉCIALISÉ E-COMMERCE. 
+CRÉE UN TEMPLATE E-COMMERCE COMPLET, RESPONSIVE (MOBILE-FIRST), MODERNE 2025, 
+SANS DÉGRADÉ, AVEC DES COULEURS PLATES (COLOR-BLOCKING).
+
+================================================================================
+== SYSTÈME DE COULEURS COMPLÈTE =================================================
+================================================================================
+
+COULEURS PRINCIPALES :
+- Primaire (Header, Navigation) : Bleu Marine #1E3A5F
+- Secondaire/CTA (Boutons) : Orange Vif #FF6B00
+- Fond Principal : Blanc #FFFFFF
+- Fond Secondaire : Gris Très Clair #F8F9FA
+- Texte Principal : Noir/Gris Foncé #333333
+- Texte Secondaire : Gris Moyen #6C757D
+- TexteMuted : Gris Clair #ADB5BD
+
+COULEURS SÉMIOTIQUES (Feedback) :
+- Succès : Vert Émeraude #047857
+- Warning : Jaune Or #FFCD00
+- Erreur : Rouge Vif #DC2626
+- Info : Bleu Ciel #3B82F6
+
+COULEURS PROMO/URGENCE :
+- Badge Promo : Rouge #DC2626
+- Badge Nouveau : Vert #047857
+- Badge Best-Seller : Or #D4AF37
+
+================================================================================
+== TYPOGRAPHIE ==================================================================
+================================================================================
+
+FAMILLE DE POLICES :
+- Principale : 'Inter', sans-serif (ou 'Poppins' pour titres)
+- Secondaire : 'Roboto', sans-serif (pour corps de texte)
+- Monospace : 'Fira Code' (pour codes produits, prix)
+
+Tailles Desktop :
+- H1 (Page Title) : 48px, weight 700, line-height 1.2
+- H2 (Section Title) : 36px, weight 600, line-height 1.3
+- H3 (Card Title) : 24px, weight 600, line-height 1.4
+- H4 (Subsection) : 20px, weight 500, line-height 1.4
+- Body Large : 18px, weight 400, line-height 1.6
+- Body Regular : 16px, weight 400, line-height 1.6
+- Body Small : 14px, weight 400, line-height 1.5
+- Caption : 12px, weight 400, line-height 1.4
+- Button Text : 16px, weight 600, line-height 1.4
+
+Spécificités :
+- Tous les titres : letter-spacing -0.02em
+- Texte principal : letter-spacing 0
+- Chiffres/Prix : font-variant-numeric: tabular-nums
+
+TAILLES MOBILE (Width < 768px) :
+- H1 : 32px
+- H2 : 28px
+- H3 : 20px
+- H4 : 18px
+- Body : 15px
+- Button : 15px
+
+================================================================================
+== ESPACEMENT (SPACING SYSTEM) ==================================================
+================================================================================
+
+Scale : 4px base
+- xs : 4px
+- sm : 8px
+- md : 16px
+- lg : 24px
+- xl : 32px
+- 2xl : 48px
+- 3xl : 64px
+- 4xl : 80px
+
+Container Widths :
+- Max Width : 1200px (desktop)
+- Tablet : 768px
+- Mobile : 375px (min)
+
+Padding Sections :
+- Section Desktop : 80px top/bottom
+- Section Mobile : 48px top/bottom
+
+================================================================================
+== BOUTONS ======================================================================
+================================================================================
+
+BOUTON PRIMAIRE (CTA - "Ajouter au Panier", "Acheter") :
+- Background : #FF6B00 (Orange)
+- Hover : #E55A00 (Orange plus foncé)
+- Active : #CC5000
+- Text Color : #FFFFFF
+- Padding : 14px 28px (desktop), 12px 24px (mobile)
+- Border Radius : 8px
+- Font Size : 16px (desktop), 15px (mobile)
+- Font Weight : 600
+- Box Shadow : 0 4px 12px rgba(255, 107, 0, 0.3)
+- Hover Shadow : 0 6px 16px rgba(255, 107, 0, 0.4)
+- Transition : all 0.3s ease
+- Min Height : 48px (touch-friendly)
+- Full Width Mobile : yes (width 100%)
+
+BOUTON SECONDAIRE ("Voir plus", "Annuler") :
+- Background : #FFFFFF (Blanc)
+- Border : 2px solid #1E3A5F
+- Text Color : #1E3A5F
+- Hover Background : #1E3A5F
+- Hover Text : #FFFFFF
+- Padding : 12px 24px
+- Border Radius : 8px
+- Font Weight : 600
+
+BOUTON TERTIAIRE (Icon-only : Favorites, Cart) :
+- Background : Transparent
+- Icon Size : 24px
+- Color : #333333
+- Hover Color : #FF6B00
+- Padding : 8px
+
+ÉTATS DES BOUTONS :
+- Disabled : Background #E5E7EB, Text #9CA3AF, Cursor not-allowed
+- Loading : Spinner animé + "Chargement..."
+- Focus : Outline 2px solid #FF6B00, Outline offset 2px
+
+================================================================================
+== CARTES PRODUITS ==============================================================
+================================================================================
+
+CARTE PRODUIT STANDARD (Desktop) :
+- Width : 280px (grid 4 colonnes)
+- Background : #FFFFFF
+- Border Radius : 12px
+- Box Shadow : 0 2px 8px rgba(0, 0, 0, 0.08)
+- Hover Shadow : 0 8px 24px rgba(0, 0, 0, 0.12)
+- Padding : 16px
+- Transition : transform 0.3s ease, box-shadow 0.3s ease
+
+CARTE PRODUIT (Mobile) :
+- Width : 100% (grid 2 colonnes)
+- Padding : 12px
+
+CONTENU CARTE :
+- Image Produit : 
+  * Aspect Ratio : 1:1 (carré)
+  * Width : 100%
+  * Height : 240px (desktop), 180px (mobile)
+  * Border Radius : 8px
+  * Object-fit : cover
+  * Hover : zoom 1.05 (transform scale)
+
+- Badge (Corner Top-Left) :
+  * Position : absolute, top 8px, left 8px
+  * Background : #DC2626 (rouge promo) ou #047857 (nouveau)
+  * Text Color : #FFFFFF
+  * Padding : 4px 8px
+  * Font Size : 12px
+  * Font Weight : 600
+  * Border Radius : 4px
+  * Z-index : 10
+
+- Titre Produit :
+  * Font Size : 16px (desktop), 14px (mobile)
+  * Font Weight : 600
+  * Color : #333333
+  * Max Lines : 2
+  * Overflow : ellipsis
+  * Margin Top : 12px
+
+- Description (optionnel) :
+  * Font Size : 14px
+  * Color : #6C757D
+  * Max Lines : 1
+  * Margin Top : 4px
+
+- Prix :
+  * Prix Actuel : 20px, weight 700, color #1E3A5F
+  * Prix Ancien (si promo) : 14px, weight 400, color #9CA3AF, text-decoration line-through
+  * Margin Top : 8px
+  * Display : flex, align-items center, gap 8px
+
+- Stock Status :
+  * Disponible : Texte vert #047857, "En stock"
+  * Faible : Texte orange #FF6B00, "Dernières pièces"
+  * Rupture : Texte rouge #DC2626, "Rupture de stock", overlay gris opacity 0.5
+
+- Bouton "Ajouter au Panier" :
+  * Full Width carte
+  * Padding : 10px 16px
+  * Font Size : 14px
+  * Margin Top : 12px
+
+- Actions Secondaires (Heart, Share) :
+  * Position : absolute, top 8px, right 8px
+  * Icon Button : 36px × 36px
+  * Background : #FFFFFF
+  * Border Radius : 50%
+  * Box Shadow : 0 2px 8px rgba(0,0,0,0.1)
+
+================================================================================
+== NAVBAR (DESKTOP) =============================================================
+================================================================================
+
+NAVBAR FIXED TOP :
+- Height : 72px (desktop), 64px (mobile)
+- Background : #1E3A5F (Bleu Marine)
+- Position : fixed, top 0, left 0, right 0
+- Z-index : 1000
+- Padding : 0 48px (desktop), 0 16px (mobile)
+- Box Shadow : 0 2px 12px rgba(0, 0, 0, 0.1)
+
+CONTENU NAVBAR (Desktop - Flex row, space-between) :
+1. LOGO (Gauche) :
+   - Width : 140px
+   - Height : 40px
+   - Object-fit : contain
+
+2. NAVIGATION CENTRALE (Categories) :
+   - Display : flex, gap 32px
+   - Links : 
+     * Font Size : 15px
+     * Font Weight : 500
+     * Color : #FFFFFF
+     * Padding : 8px 0
+     * Position : relative
+     * Hover : color #FF6B00
+     * Active : color #FF6B00 + underline 2px
+     * Transition : color 0.2s ease
+
+3. ACTIONS (Droite - Flex row, gap 16px) :
+   - Search Icon : 24px, color #FFFFFF, cursor pointer
+   - User Icon : 24px, color #FFFFFF, cursor pointer
+   - Wishlist Icon : 24px, color #FFFFFF, badge count
+   - Cart Icon : 24px, color #FFFFFF, badge count
+   - Badge :
+     * Position : absolute, top -4px, right -4px
+     * Background : #FF6B00
+     * Color : #FFFFFF
+     * Font Size : 11px
+     * Font Weight : 700
+     * Min Width : 18px
+     * Height : 18px
+     * Border Radius : 50%
+     * Padding : 0 4px
+
+DROPDOWN MENU (Hover sur category) :
+- Background : #FFFFFF
+- Min Width : 240px
+- Padding : 12px 0
+- Box Shadow : 0 8px 24px rgba(0, 0, 0, 0.15)
+- Border Radius : 8px
+- Link Padding : 10px 16px
+- Link Hover : Background #F8F9FA, color #FF6B00
+- Transition : opacity 0.2s ease, transform 0.2s ease
+
+================================================================================
+== NAVBAR MOBILE (HAMBURGER MENU) ================================================
+================================================================================
+
+HAMBURGER BUTTON :
+- Position : absolute, top 50%, right 16px, transform translateY(-50%)
+- Display : mobile only (block < 768px)
+- Width : 32px, Height : 32px
+- Background : Transparent
+- Border : none
+- Cursor : pointer
+- Z-index : 1001
+
+ICÔNE HAMBURGER :
+- 3 lignes : 24px × 2px chacune
+- Gap entre lignes : 6px
+- Background : #FFFFFF
+- Transition : all 0.3s ease
+
+ÉTAT OUVERT (Hamburger → X) :
+- Ligne 1 : rotate 45deg, translateY 6px
+- Ligne 2 : opacity 0
+- Ligne 3 : rotate -45deg, translateY -6px
+
+MENU MOBILE (Overlay Plein Écran) :
+- Position : fixed, top 0, left 0, width 100%, height 100%
+- Background : #1E3A5F
+- Z-index : 999
+- Transform : translateX(-100%) (fermé), translateX(0) (ouvert)
+- Transition : transform 0.3s ease-in-out
+- Padding : 80px 24px 24px
+
+MENU ITEMS (Mobile) :
+- Display : flex, flex-column, gap 0
+- Link :
+  * Font Size : 18px
+  * Font Weight : 500
+  * Color : #FFFFFF
+  * Padding : 16px 0
+  * Border Bottom : 1px solid rgba(255,255,255,0.1)
+  * Hover : color #FF6B00, padding-left 8px
+  * Transition : all 0.2s ease
+
+SOUS-MENU (Mobile) :
+- Padding Left : 24px
+- Background : rgba(255,255,255,0.05)
+- Link : Font Size 16px
+
+BARRE DE RECHERCHE MOBILE :
+- Position : fixed, top 0, left 0, width 100%
+- Background : #1E3A5F
+- Padding : 16px
+- Display : flex, gap 12px
+- Input :
+  * Flex : 1
+  * Padding : 12px 16px
+  * Border Radius : 8px
+  * Border : none
+  * Background : rgba(255,255,255,0.1)
+  * Color : #FFFFFF
+  * Placeholder Color : #ADB5BD
+- Icon Search : 24px, color #FFFFFF
+
+BOTTOM NAVBAR MOBILE (Sticky Footer) :
+- Position : fixed, bottom 0, left 0, width 100%
+- Height : 64px
+- Background : #FFFFFF
+- Box Shadow : 0 -2px 12px rgba(0,0,0,0.08)
+- Display : flex, justify-content space-around
+- Z-index : 1000
+- Items (5 icônes) :
+  * Home
+  * Categories
+  * Search
+  * Wishlist
+  * Cart
+- Icon : 24px
+- Label : 11px, margin-top 4px
+- Color Inactive : #6C757D
+- Color Active : #FF6B00
+- Active : icon weight bold + label
+
+================================================================================
+== SIDEBAR (FILTERS PAGE CATÉGORIE) ==============================================
+================================================================================
+
+SIDEBAR Desktop (Gauche) :
+- Width : 280px
+- Position : sticky, top 88px (navbar height + gap)
+- Background : #FFFFFF
+- Border Radius : 12px
+- Box Shadow : 0 2px 8px rgba(0,0,0,0.08)
+- Padding : 24px
+- Max Height : calc(100vh - 100px)
+- Overflow Y : auto
+
+SIDEBAR Mobile (Drawer) :
+- Width : 100% (full screen) ou 320px ( Slide)
+- Position : fixed, top 0, left 0, height 100%
+- Background : #FFFFFF
+- Z-index : 1001
+- Transform : translateX(-100%) (fermé)
+- Transition : transform 0.3s ease
+
+CONTENU SIDEBAR :
+- Header :
+  * Title : "Filtres" 20px, weight 600
+  * Close Button : Icon X 24px, top right
+
+- Filtre par Catégorie :
+  * Checkbox custom
+  * Gap 12px
+  * Indentation sous-catégories : 16px
+
+- Filtre Prix :
+  * Range Slider :
+    - Track Height : 4px
+    - Track Background : #E5E7EB
+    - Thumb : 20px circle, Background #FF6B00
+    - Min/Max Display : "1000 FCFA - 50000 FCFA"
+
+- Filtre Stock :
+  * Radio buttons : "Disponible", "Faible", "Tout"
+
+- Filtre Fournisseur :
+  * Checkbox avec search input
+
+- Boutons Actions :
+  * "Appliquer" : Primary, full width
+  * "Réinitialiser" : Secondary, full width
+  * Gap : 12px
+  * Margin Top : 24px
+
+================================================================================
+== HEADER PAGE (HERO SECTION) ====================================================
+================================================================================
+
+HERO BANNER (Desktop) :
+- Height : 500px
+- Background : #1E3A5F (ou image produit)
+- Display : flex, align-items center
+- Padding : 0 80px
+- Color : #FFFFFF
+
+HERO CONTENT :
+- Max Width : 600px
+- Title : 56px, weight 700, line-height 1.1, margin-bottom 16px
+- Subtitle : 20px, weight 400, margin-bottom 24px
+- CTA Button : Primary, padding 16px 32px
+
+HERO MOBILE :
+- Height : 300px
+- Padding : 0 24px
+- Title : 32px
+- Subtitle : 16px
+- CTA Button : Full width
+
+BANNIÈRE PROMO (Top Bar) :
+- Height : 40px
+- Background : #FF6B00
+- Color : #FFFFFF
+- Text Center : 14px, weight 500
+- Close Button : Icon X 20px, right 16px
+
+================================================================================
+== CORPS DE PAGE (MAIN CONTENT) ==================================================
+================================================================================
+
+GRID PRODUITS (Page Catégorie) :
+- Display : grid
+- Desktop : grid-template-columns repeat(4, 1fr), gap 24px
+- Tablet : grid-template-columns repeat(3, 1fr), gap 20px
+- Mobile : grid-template-columns repeat(2, 1fr), gap 12px
+- Padding : 24px (desktop), 16px (mobile)
+
+GRID CATÉGORIES :
+- Desktop : grid-template-columns repeat(3, 1fr), gap 24px
+- Mobile : grid-template-columns repeat(2, 1fr), gap 16px
+
+CARTE CATÉGORIE :
+- Aspect Ratio : 4:3
+- Background : #F8F9FA
+- Border Radius : 12px
+- Image : object-fit cover, height 100%
+- Overlay : Gradient noir opacity 0.4
+- Title : Center, white, 20px, weight 600
+- Padding : 24px
+
+PAGINATION :
+- Display : flex, justify-content center, gap 8px
+- Page Button :
+  * Width : 40px, Height : 40px
+  * Background : #FFFFFF
+  * Border : 1px solid #E5E7EB
+  * Border Radius : 8px
+  * Color : #333333
+  * Font Weight : 500
+  * Hover : Background #1E3A5F, color white
+- Active Page :
+  * Background : #FF6B00
+  * Border : 1px solid #FF6B00
+  * Color : #FFFFFF
+
+三大 SECTION (Features/Benefits) :
+- 3 colonnes : Livraison, Paiement Sécure, Support
+- Icon : 48px, color #1E3A5F
+- Title : 18px, weight 600, margin-top 12px
+- Text : 14px, color #6C757D, margin-top 8px
+
+================================================================================
+== FOOTER ========================================================================
+================================================================================
+
+FOOTER (Desktop) :
+- Background : #1E3A5F
+- Color : #FFFFFF
+- Padding : 64px 80px 32px
+- Display : grid, grid-template-columns repeat(4, 1fr), gap 48px
+
+FOOTER (Mobile) :
+- Padding : 48px 24px 24px
+- Grid : 1 colonne, gap 32px
+
+COLONNES FOOTER :
+1. Logo + Description :
+   - Logo Width : 140px
+   - Description : 14px, color #ADB5BD, margin-top 12px
+   - Social Icons : 5 lacé, gap 12px, 24px each
+
+2. Liens Rapides :
+   - Title : 16px, weight 600, margin-bottom 16px
+   - Links : 14px, color #ADB5BD, gap 12px, flex-column
+   - Hover : color #FF6B00
+
+3. Catégories :
+   - Même structure que Liens Rapides
+
+4. Contact + Newsletter :
+   - Email : 14px, color #ADB5BD
+   - Téléphone : 14px, color #ADB5BD
+   - Adresse : 14px, color #ADB5BD
+
+NEWSLETTER :
+- Input :
+  * Padding : 12px 16px
+  * Border Radius : 8px
+  * Border : none
+  * Width : 100%
+  * Margin Bottom : 12px
+- Button : Primary, full width
+
+FOOTER BOTTOM :
+- Border Top : 1px solid rgba(255,255,255,0.1)
+- Padding : 24px 0
+- Text Center : 14px, color #ADB5BD
+- Display : flex, justify-content space-between (desktop)
+- Mobile : flex-column, text center
+
+================================================================================
+== COMPOSANTS SPÉCIAUX E-COMMERCE ================================================
+================================================================================
+
+BARRE DE RECHERCHE (Avec Autocomplete) :
+- Desktop : Width 400px, Height 48px
+- Mobile : Width 100%, Height 44px
+- Border Radius : 8px
+- Padding : 12px 16px
+- Border : 1px solid #E5E7EB
+- Background : #FFFFFF
+- Focus : Border 2px solid #FF6B00, Outline none
+- Autocomplete Dropdown :
+  * Max Height : 400px
+  * Overflow Y : auto
+  * Item Padding : 12px 16px
+  * Item Hover : Background #F8F9FA
+  * Suggestion Image : 48px × 48px, border-radius 4px
+
+PANIER (Cart Drawer) :
+- Position : fixed, top 0, right 0, height 100%
+- Width : 400px (desktop), 100% (mobile)
+- Background : #FFFFFF
+- Z-index : 1002
+- Transform : translateX(100%) (fermé)
+- Transition : transform 0.3s ease
+- Box Shadow : -4px 0 24px rgba(0,0,0,0.15)
+
+ITEM PANIER :
+- Display : flex, gap 16px
+- Padding : 16px 0
+- Border Bottom : 1px solid #E5E7EB
+- Image : 80px × 80px, border-radius 8px
+- Quantity Selector :
+  * Button - : 32px × 32px, Background #F8F9FA
+  * Input : 48px × 32px, text center
+  * Button + : 32px × 32px, Background #F8F9FA
+  * Border : 1px solid #E5E7EB
+
+CHECKOUT STEPS :
+- 4 étapes : Panier → Livraison → Paiement → Confirmation
+- Step Indicator : Circle 32px, Number 14px
+- Active Step : Background #FF6B00, color white
+- Completed Step : Background #047857, color white
+- Line Connecteur : 2px solid #E5E7EB
+
+NOTIFICATIONS (Toast) :
+- Position : fixed, bottom 24px, right 24px
+- Background : #FFFFFF
+- Padding : 16px 24px
+- Border Radius : 8px
+- Box Shadow : 0 4px 12px rgba(0,0,0,0.15)
+- Max Width : 400px
+- Icon : 24px, left 12px
+- Text : 14px
+- Types : success (#047857), error (#DC2626), warning (#FFCD00), info (#3B82F6)
+- Auto Close : 4s
+- Transition : transform 0.3s ease, opacity 0.3s ease
+
+LOADER (Skeleton) :
+- Background : #E5E7EB
+- Animation : pulse 1.5s infinite
+- Border Radius : 8px
+- Utilisé pour : produits, images, carte
+
+MODAL :
+- Overlay : Background rgba(0,0,0,0.5), backdrop-filter blur 4px
+- Content : Background #FFFFFF, Border Radius 12px, Max Width 600px
+- Padding : 24px
+- Close Button : Top right, 24px
+
+================================================================================
+== RESPONSIVE BREAKPOINTS ========================================================
+================================================================================
+
+- Mobile XS : < 375px
+- Mobile : 375px - 767px
+- Tablet : 768px - 1023px
+- Desktop : 1024px - 1199px
+- Desktop XL : ≥ 1200px
+
+RÈGLES RESPONSIVES :
+- Padding sections : 80px (desktop) → 48px (tablet) → 32px (mobile)
+- Grid produits : 4 col (desktop) → 3 col (tablet) → 2 col (mobile)
+- Font sizes : -20% (tablet), -30% (mobile)
+- Navbar : Fixed top (desktop+mobile), Hamburger (mobile only)
+- Sidebar : Sticky (desktop) → Drawer (mobile)
+- Footer : 4 colonnes (desktop) → 2 colonnes (tablet) → 1 colonne (mobile)
+
+================================================================================
+== ANIMATIONS & INTERACTIONS =====================================================
+================================================================================
+
+TRANSITIONS GLOBALES :
+- All : 0.3s ease
+- Hover : 0.2s ease
+- Transform : 0.3s ease
+
+HOVER EFFECTS :
+- Boutons : transform translateY(-2px), box-shadow increase
+- Cartes : transform translateY(-4px), box-shadow increase
+- Liens : color change, underline (optionnel)
+- Images produits : scale 1.05
+
+SCROLL EFFECTS :
+- Navbar : Background change on scroll (solid)
+- Hero : Parallax léger (optionnel)
+- Infinit scroll : Optionnel pour produits
+
+LOAD ANIMATIONS :
+- Fade In : opacity 0 → 1, transform translateY(20px) → 0
+- Stagger : 100ms delay entre items
+
+================================================================================
+== ACCESSIBILITÉ =================================================================
+================================================================================
+
+- Contraste minimum : 4.5:1 (texte normal), 3:1 (texte grand)
+- Focus visible : Outline 2px solid #FF6B00
+- Touch target min : 44px × 44px
+- ARIA labels : Tous les boutons icon
+- Semantic HTML : header, nav, main, section, footer
+- Skip to content link : Premier focus
+
+================================================================================
+== PERFORMANCE ==================================================================
+================================================================================
+
+- Images : WebP format, lazy loading
+- Fonts : Preload, font-display swap
+- Critical CSS : Inline
+- Debounce : Search input (300ms)
+- Virtual scroll : Liste produits > 100 items
+
+================================================================================
+== LIVRABLE ATTENDU ==============================================================
+================================================================================
+
+GÉNÈRE :
+1. Fichier HTML complet avec toutes les sections
+2. Fichier CSS complet (avec variables CSS pour couleurs/tailles)
+3. Fichier JavaScript (navbar mobile, filtres, panier, notifications)
+4. Composants réutilisables (button, card, input, modal)
+5. Version mobile FIRST, progressive enhancement desktop
+6. Code propre, commenté, avec BEM ou utility classes
+
+TEMPLATE DOIT ÊTRE :
+- Prêt à l'emploi (copy-paste, fonctionne immédiatement)
+- Responsive parfait (mobile, tablet, desktop)
+- Moderne 2025 (tendances actuelles)
+- Optimisé conversion (CTA visibles, UX fluide)
+- Compatible navigateurs modernes (Chrome, Firefox, Safari, Edge)
+
+================================================================================
+END OF PROMPT
+================================================================================
+
+
+rectificatif: 
+1. au mobile on doit pense que c'est un vrai app mobile avec un nav bien adapte avec panier et les autre icon restant
+ et un btnNavBar bien propre et anime et pro tout l'app coherente
+
+2. le nom du proje est woli et le logo est dans le assets images
+
+3. le css de mobile doit etre dans un autre file a part et pour web a part 
+
+4. structure et separe bien les dossier et fichier  
