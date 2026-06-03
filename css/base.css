@@ -765,3 +765,131 @@ body.category-open {
   }
 }
 
+/* ================================================================================
+   == HOME PAGE SEARCH/FILTER DRAWER STYLES ==
+   ================================================================================ */
+.products-header-controls {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.btn-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 8px 16px;
+  border: 1px solid #E5E7EB;
+  background-color: #FFFFFF;
+  color: var(--text-main);
+  border-radius: 8px;
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-all);
+  min-height: 38px;
+}
+
+.btn-filter:hover {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+  background-color: var(--bg-secondary);
+}
+
+.btn-filter svg {
+  flex-shrink: 0;
+}
+
+/* Sidebar Drawer Style overriding on Desktop and Tablet for index.html */
+.sidebar.sidebar--drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 380px;
+  max-width: 85%;
+  height: 100%;
+  background: #FFFFFF;
+  z-index: 2005;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.sidebar.sidebar--drawer.open {
+  transform: translateX(0);
+}
+
+.sidebar.sidebar--drawer .sidebar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.sidebar.sidebar--drawer .sidebar__close-btn {
+  display: block;
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.sidebar.sidebar--drawer .sidebar__content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* Backdrop for home page drawer */
+.sidebar-backdrop.index-page-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 2004;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-backdrop.index-page-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 767px) {
+  .products-header-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .products-filter-tabs {
+    width: auto;
+    flex-grow: 1;
+    overflow-x: auto;
+    display: flex;
+  }
+
+  .btn-filter span {
+    display: none; /* Icon only on mobile to save space */
+  }
+
+  .btn-filter {
+    padding: 8px 12px;
+  }
+}
+
+
