@@ -1304,7 +1304,7 @@ function openProductFullscreen(code) {
       </div>
     </div>
   `;
-
+// s
   recGrid.innerHTML = PRODUCTS.filter(p => p.code_produit !== code).slice(0, 8).map(renderProductCard).join('');
   bindProductGridEvents(recGrid);
 
