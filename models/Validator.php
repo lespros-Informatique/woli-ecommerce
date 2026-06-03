@@ -813,26 +813,6 @@ class Validator
         return null; // Retourner null si les entrées ne sont pas valides
     }
 
-    public static function delai($dateFin)
-    {
-        if ($dateFin != null) {
-            $dateFin = new DateTime($dateFin);
-            $today = new DateTime();
-            $interval = $today->diff($dateFin);
-            $nb = $interval->format('%a') + 1;
-
-            if ($dateFin->format('Y-m-d') === $today->format('Y-m-d')) {
-                return '<span class="badge" ' . BG_COLOR_ORG . ' >Dernier jour</span>';
-            } elseif ($interval->invert) {
-                return '<span class="badge  badge-danger " ' . BG_COLOR_RED . '>Passé</span>';
-            } else {
-                return '<span class="badge bg-success" ' . BG_COLOR_VERT . ' >' . $nb . ' jr' . ($nb > 1 ? 's' : '') . '</span>';
-            }
-        } else {
-            return 'Aucun date';
-        }
-    }
-
     public static function formatDate($date)
     {
         // Vérifier si la date est valide
@@ -908,11 +888,5 @@ class Validator
         }
     }
 
-public static function sendTelegram($chat_id,$message) {
-  file_get_contents(
-        "https://api.telegram.org/bot".MON_TOKEN_TELEGRAM_BOT.
-        "/sendMessage?chat_id=$chat_id&text=".urlencode($message)
-    );
-}
 
 }
