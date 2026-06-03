@@ -1229,6 +1229,30 @@ function handleFavoritesPopState(e) {
    if (modal && modal.classList.contains('category-fullscreen--open')) {
      closeFavoritesFullscreen();
    }
+ }
+
+function openAccountFullscreen() {
+  const modal = document.querySelector('.js-account-fullscreen');
+  if (!modal) return;
+  modal.classList.add('category-fullscreen--open');
+  document.body.classList.add('category-open');
+  history.pushState({ accountOpen: true }, '', '');
+  window.addEventListener('popstate', handleAccountPopState);
+}
+
+function closeAccountFullscreen() {
+  const modal = document.querySelector('.js-account-fullscreen');
+  if (!modal) return;
+  modal.classList.remove('category-fullscreen--open');
+  document.body.classList.remove('category-open');
+  window.removeEventListener('popstate', handleAccountPopState);
+}
+
+function handleAccountPopState(e) {
+  const modal = document.querySelector('.js-account-fullscreen');
+  if (modal && modal.classList.contains('category-fullscreen--open')) {
+    closeAccountFullscreen();
+  }
 }
 
 function openProductFullscreen(code) {
@@ -1280,7 +1304,7 @@ function openProductFullscreen(code) {
       </div>
     </div>
   `;
-
+// s
   recGrid.innerHTML = PRODUCTS.filter(p => p.code_produit !== code).slice(0, 8).map(renderProductCard).join('');
   bindProductGridEvents(recGrid);
 
