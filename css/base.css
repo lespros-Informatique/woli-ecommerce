@@ -299,6 +299,20 @@ p {
   left: 8px;
 }
 
+.product-card__promo-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--color-error);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  z-index: 10;
+  font-family: var(--font-mono);
+}
+
 .product-card__favorite {
   position: absolute;
   top: 8px;

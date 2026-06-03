@@ -278,7 +278,7 @@ function renderAutocompleteResults(matches, container) {
   container.querySelectorAll('.autocomplete-item').forEach(item => {
     item.addEventListener('click', () => {
       const code = item.getAttribute('data-code');
-      openProductModal(code);
+      openProductFullscreen(code);
       container.style.display = 'none';
     });
   });
@@ -351,13 +351,11 @@ function renderProducts() {
         stockClass = 'product-card__stock--rupture';
       }
 
-      // Badges
-      let badgeHtml = '';
-      if (prod.badge) {
-        let badgeType = 'badge-promo';
-        if (prod.badge === 'Nouveau') badgeType = 'badge-new';
-        if (prod.badge === 'Best-Seller') badgeType = 'badge-bestseller';
-        badgeHtml = `<span class="badge ${badgeType} product-card__badge">${prod.badge}</span>`;
+      // Promo badge
+      let promoBadgeHtml = '';
+      if (prod.badge === 'Promo') {
+        const percent = Math.round((1 - prod.prix_vente_produit / Math.round(prod.prix_vente_produit * 1.25)) * 100);
+        promoBadgeHtml = `<span class="product-card__promo-badge">-${percent}%</span>`;
       }
 
       // Promo check for original price
@@ -379,7 +377,7 @@ function renderProducts() {
         <article class="product-card" data-code="${prod.code_produit}">
           ${prod.statut_stock_produit === 'rupture' ? '<div class="product-card__stock--rupture-overlay"></div>' : ''}
           <div class="product-card__image-container">
-            ${badgeHtml}
+        ${promoBadgeHtml}
             <button class="product-card__favorite js-favorite" aria-label="Ajouter aux favoris">
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
             </button>
@@ -404,28 +402,7 @@ function renderProducts() {
     }).join('');
 
     // Bind card events
-    grid.querySelectorAll('.js-open-detail').forEach(el => {
-      el.addEventListener('click', (e) => {
-        const code = e.target.closest('.product-card').getAttribute('data-code');
-        openProductModal(code);
-      });
-    });
-
-grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const code = e.target.closest('.product-card').getAttribute('data-code');
-        addToCart(code, e.currentTarget);
-      });
-    });
-
-
-    grid.querySelectorAll('.js-favorite').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.currentTarget.classList.toggle('active');
-        const isActive = e.currentTarget.classList.contains('active');
-        showToast(isActive ? 'Ajouté aux favoris' : 'Retiré des favoris', 'info');
-      });
-    });
+    bindProductGridEvents(grid);
 
   }, 600);
 }
@@ -446,6 +423,32 @@ function renderSkeletons(grid, count) {
     `;
   }
   grid.innerHTML = skeletonsHtml;
+}
+
+function bindProductGridEvents(grid) {
+  if (!grid) return;
+
+  grid.querySelectorAll('.js-open-detail').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const code = e.target.closest('.product-card').getAttribute('data-code');
+      openProductFullscreen(code);
+    });
+  });
+
+  grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const code = e.target.closest('.product-card').getAttribute('data-code');
+      addToCart(code, e.currentTarget);
+    });
+  });
+
+  grid.querySelectorAll('.js-favorite').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.currentTarget.classList.toggle('active');
+      const isActive = e.currentTarget.classList.contains('active');
+      showToast(isActive ? 'Ajouté aux favoris' : 'Retiré des favoris', 'info');
+    });
+  });
 }
 
 // ================================================================================
@@ -1149,6 +1152,80 @@ function closeCategoryFullscreen() {
   currentCategoryImg = '';
 }
 
+function openProductFullscreen(code) {
+  const prod = PRODUCTS.find(p => p.code_produit === code);
+  if (!prod) return;
+  const modal = document.querySelector('.js-product-fullscreen');
+  const content = document.querySelector('.js-product-fullscreen-content');
+  const recGrid = document.querySelector('.js-product-fullscreen-recommendations');
+  if (!modal || !content || !recGrid) return;
+
+  const supplier = FOURNISSEURS[prod.fournisseur_code];
+  const catLabel = CATEGORIES[prod.categorie_code] ? CATEGORIES[prod.categorie_code].libelle : '';
+
+  let stockLabel = 'En stock';
+  let stockClass = 'product-card__stock--disponible';
+  if (prod.statut_stock_produit === 'faible') { stockLabel = 'Stock faible'; stockClass = 'product-card__stock--faible'; }
+  else if (prod.statut_stock_produit === 'rupture') { stockLabel = 'Rupture'; stockClass = 'product-card__stock--rupture'; }
+
+  content.innerHTML = `
+    <div style="background:#FFFFFF; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.05); margin-bottom: var(--space-md);">
+      <div style="position:relative;">
+        <img src="${prod.image_produit}" alt="${prod.libelle_produit}" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block;">
+        ${prod.badge === 'Promo' ? `<span class="product-card__promo-badge" style="position:absolute; top:10px; left:10px;">-${Math.round((1 - prod.prix_vente_produit / Math.round(prod.prix_vente_produit * 1.25)) * 100)}%</span>` : ''}
+      </div>
+      <div style="padding: var(--space-md);">
+        <div style="font-size:12px; color: var(--text-secondary); margin-bottom:4px;">${catLabel}</div>
+        <h2 style="font-size:17px; font-weight:700; color: var(--primary-color); margin-bottom:8px; line-height:1.25;">${prod.libelle_produit}</h2>
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:8px;">
+          <span class="price" style="font-size:18px;">${formatPrice(prod.prix_vente_produit)}</span>
+          ${prod.badge === 'Promo' ? `<span class="price-old" style="font-size:13px;">${formatPrice(Math.round(prod.prix_vente_produit * 1.25))}</span>` : ''}
+        </div>
+        <div class="product-card__stock ${stockClass}" style="font-size:12px; font-weight:500; margin-bottom:10px; gap:6px; display:inline-flex; align-items:center;">
+          <span class="stock-indicator-dot"></span> ${stockLabel}
+        </div>
+        <p style="font-size:13px; color: var(--text-secondary); line-height:1.5; margin-bottom:12px;">${prod.description_produit}</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;">
+          <button class="btn btn-primary js-add-to-cart" style="flex:1; min-height:44px;" ${prod.statut_stock_produit === 'rupture' ? 'disabled' : ''} data-code="${prod.code_produit}">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            Ajouter au panier
+          </button>
+          <button class="btn-icon js-favorite" aria-label="Ajouter aux favoris" style="background:var(--bg-secondary); width:42px; height:42px; border-radius:10px; flex-shrink:0;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          </button>
+        </div>
+        <div style="font-size:12px; color: var(--text-secondary); display:flex; flex-direction:column; gap:4px;">
+          <div><strong>Fournisseur :</strong> ${supplier.nom} (${supplier.local})</div>
+          <div><strong>Logistique :</strong> ${supplier.type === 'Dropshipping' ? 'Dropshipping Direct' : 'Expédié par Woli'}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  recGrid.innerHTML = PRODUCTS.filter(p => p.code_produit !== code).slice(0, 8).map(renderProductCard).join('');
+  bindProductGridEvents(recGrid);
+
+  modal.classList.add('category-fullscreen--open');
+  document.body.classList.add('category-open');
+  history.pushState({ productOpen: true, code }, '', '');
+  window.addEventListener('popstate', handleProductPopState);
+}
+
+function closeProductFullscreen() {
+  const modal = document.querySelector('.js-product-fullscreen');
+  if (!modal) return;
+  modal.classList.remove('category-fullscreen--open');
+  document.body.classList.remove('category-open');
+  window.removeEventListener('popstate', handleProductPopState);
+}
+
+function handleProductPopState(e) {
+  const modal = document.querySelector('.js-product-fullscreen');
+  if (modal && modal.classList.contains('category-fullscreen--open')) {
+    closeProductFullscreen();
+  }
+}
+
 function handleCategoryPopState(e) {
   const modal = document.querySelector('.js-category-fullscreen');
   if (modal && modal.classList.contains('category-fullscreen--open')) {
@@ -1198,29 +1275,7 @@ function renderCategoryProducts() {
 
   grid.innerHTML = products.map(prod => renderProductCard(prod)).join('');
 
-  // Bind click events on cards inside the modal
-  grid.querySelectorAll('.js-open-detail').forEach(el => {
-    el.addEventListener('click', (e) => {
-      const code = e.target.closest('.product-card').getAttribute('data-code');
-      openProductModal(code);
-    });
-  });
-
-  grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const code = e.target.closest('.product-card').getAttribute('data-code');
-      addToCart(code, e.currentTarget);
-    });
-  });
-
-
-  grid.querySelectorAll('.js-favorite').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.currentTarget.classList.toggle('active');
-      const isActive = e.currentTarget.classList.contains('active');
-      showToast(isActive ? 'Ajouté aux favoris' : 'Retiré des favoris', 'info');
-    });
-  });
+  bindProductGridEvents(grid);
 }
 
 function filterProductsByTab(filter) {
@@ -1261,12 +1316,10 @@ function renderProductCard(prod) {
     stockClass = 'product-card__stock--rupture';
   }
 
-  let badgeHtml = '';
-  if (prod.badge) {
-    let badgeType = 'badge-promo';
-    if (prod.badge === 'Nouveau') badgeType = 'badge-new';
-    if (prod.badge === 'Best-Seller') badgeType = 'badge-bestseller';
-    badgeHtml = `<span class="badge ${badgeType} product-card__badge">${prod.badge}</span>`;
+  let promoBadgeHtml = '';
+  if (prod.badge === 'Promo') {
+    const percent = Math.round((1 - prod.prix_vente_produit / Math.round(prod.prix_vente_produit * 1.25)) * 100);
+    promoBadgeHtml = `<span class="product-card__promo-badge">-${percent}%</span>`;
   }
 
   let priceHtml = `<span class="price">${formatPrice(prod.prix_vente_produit)}</span>`;
@@ -1281,7 +1334,7 @@ function renderProductCard(prod) {
     <article class="product-card" data-code="${prod.code_produit}">
       ${prod.statut_stock_produit === 'rupture' ? '<div class="product-card__stock--rupture-overlay"></div>' : ''}
       <div class="product-card__image-container">
-        ${badgeHtml}
+        ${promoBadgeHtml}
         <button class="product-card__favorite js-favorite" aria-label="Ajouter aux favoris">
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
         </button>

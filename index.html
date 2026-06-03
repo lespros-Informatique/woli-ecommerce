@@ -719,8 +719,8 @@
   </div>
 
   <!-- ================================================================================
-     == CATEGORIES EXPLORER FULLSCREEN MODAL (Alibaba-style) ==
-     ================================================================================ -->
+       == CATEGORIES EXPLORER FULLSCREEN MODAL (Alibaba-style) ==
+      ================================================================================ -->
   <div class="category-fullscreen js-categories-explorer-fullscreen" id="categories-explorer-fullscreen" aria-label="Explorer les catégories">
     <!-- Sticky Header with back arrow -->
     <div class="category-fullscreen__header" style="justify-content: flex-start; gap: 16px;">
@@ -761,6 +761,31 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ================================================================================
+      == PRODUCT FULLSCREEN PAGE (Alibaba-style) ==
+      ================================================================================ -->
+  <div class="category-fullscreen js-product-fullscreen" id="product-fullscreen" aria-label="Détail produit">
+    <div class="category-fullscreen__header">
+      <button class="category-fullscreen__back js-product-fullscreen-back" aria-label="Retour" onclick="closeProductFullscreen()">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <div style="font-family: var(--font-title); font-size: 15px; font-weight: 700; color: #FFFFFF;">Détail produit</div>
+    </div>
+
+    <div class="category-fullscreen__body" style="padding-top: 72px;">
+      <div class="product-fullscreen-content js-product-fullscreen-content"></div>
+
+      <section class="section" style="background: var(--bg-secondary);">
+        <div class="container">
+          <h2 class="section-title">Recommandés</h2>
+          <div class="product-grid js-product-fullscreen-recommendations"></div>
+        </div>
+      </section>
+
+      <div style="height: 16px;"></div>
     </div>
   </div>
 
