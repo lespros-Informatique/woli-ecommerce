@@ -997,40 +997,191 @@ function initProductTabs() {
     });
   });
   
+  // Category cards now open the fullscreen category modal
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      
       const cat = chip.getAttribute('data-cat');
-      if (chip.classList.contains('category-card-small')) {
-        // C'est une carte catégorie petite
-        if (cat === 'all') {
-          activeFilters.categories = [];
-        } else if (cat === 'new') {
-          const filtered = PRODUCTS.filter(p => p.badge === 'Nouveau');
-          renderFilteredProducts(filtered);
-          return;
-        } else {
-          activeFilters.categories = [cat];
-        }
-      } else {
-        // C'est un chip
-        if (cat === 'all') {
-          activeFilters.categories = [];
-        } else if (cat === 'new') {
-          const filtered = PRODUCTS.filter(p => p.badge === 'Nouveau');
-          renderFilteredProducts(filtered);
-          return;
-        } else if (cat === 'Promo') {
-          const filtered = PRODUCTS.filter(p => p.badge === 'Promo');
-          renderFilteredProducts(filtered);
-          return;
-        } else {
-          activeFilters.categories = [cat];
-        }
-      }
-      renderProducts();
+      const label = chip.querySelector('.category-card-small__label');
+      const img = chip.querySelector('.category-card-small__image');
+      const catName = label ? label.textContent.trim() : '';
+      const catImg = img ? img.src : '';
+      
+      openCategoryFullscreen(cat, catName, catImg);
+    });
+  });
+
+  // Init category fullscreen back button & search
+  const backBtn = document.querySelector('.js-category-back');
+  if (backBtn) {
+    backBtn.addEventListener('click', closeCategoryFullscreen);
+  }
+
+  const categorySearch = document.querySelector('.js-category-search');
+  if (categorySearch) {
+    let debounceTimer;
+    categorySearch.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        renderCategoryProducts();
+      }, 250);
+    });
+  }
+}
+
+// --- Current category context for the fullscreen modal ---
+let currentCategoryCode = null;
+let currentCategoryName = '';
+let currentCategoryImg = '';
+
+// Category banner images mapped to codes
+const CATEGORY_BANNER_IMAGES = {
+  'CAT01': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80',
+  'CAT02': 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&auto=format&fit=crop&q=80',
+  'CAT03': 'https://images.unsplash.com/photo-1517256064527-09c53b2d0bc6?w=800&auto=format&fit=crop&q=80',
+  'CAT04': 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80',
+  'new':   'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80'
+};
+
+function openCategoryFullscreen(catCode, catName, catImg) {
+  currentCategoryCode = catCode;
+  currentCategoryName = catName;
+  currentCategoryImg = catImg;
+
+  const modal = document.querySelector('.js-category-fullscreen');
+  const searchInput = document.querySelector('.js-category-search');
+  const bannerImg = document.querySelector('.js-category-banner-img');
+  const bannerTitle = document.querySelector('.js-category-banner-title');
+  const bannerDesc = document.querySelector('.js-category-banner-desc');
+  const bannerCount = document.querySelector('.js-category-banner-count');
+
+  if (!modal) return;
+
+  // Pre-fill search with category name
+  if (searchInput) {
+    searchInput.value = catName;
+  }
+
+  // Set banner
+  const bannerSrc = CATEGORY_BANNER_IMAGES[catCode] || catImg;
+  if (bannerImg) {
+    bannerImg.src = bannerSrc;
+    bannerImg.alt = catName;
+  }
+
+  // Set banner info
+  let catDesc = '';
+  let catLabel = catName;
+  if (catCode !== 'new' && CATEGORIES[catCode]) {
+    catDesc = CATEGORIES[catCode].desc;
+    catLabel = CATEGORIES[catCode].libelle;
+  } else if (catCode === 'new') {
+    catDesc = 'Découvrez nos dernières arrivées';
+    catLabel = 'Nouveautés';
+  }
+
+  if (bannerTitle) bannerTitle.textContent = catLabel;
+  if (bannerDesc) bannerDesc.textContent = catDesc;
+
+  // Count products
+  const products = getCategoryProducts();
+  if (bannerCount) bannerCount.textContent = `${products.length} produit${products.length > 1 ? 's' : ''}`;
+
+  // Open modal with animation
+  modal.classList.add('category-fullscreen--open');
+  document.body.classList.add('category-open');
+
+  // Render products
+  renderCategoryProducts();
+
+  // Handle back with browser history for a native feel
+  history.pushState({ categoryOpen: true }, '', '');
+  window.addEventListener('popstate', handleCategoryPopState);
+}
+
+function closeCategoryFullscreen() {
+  const modal = document.querySelector('.js-category-fullscreen');
+  if (!modal) return;
+
+  modal.classList.remove('category-fullscreen--open');
+  document.body.classList.remove('category-open');
+
+  // Clean up popstate listener
+  window.removeEventListener('popstate', handleCategoryPopState);
+
+  currentCategoryCode = null;
+  currentCategoryName = '';
+  currentCategoryImg = '';
+}
+
+function handleCategoryPopState(e) {
+  const modal = document.querySelector('.js-category-fullscreen');
+  if (modal && modal.classList.contains('category-fullscreen--open')) {
+    closeCategoryFullscreen();
+  }
+}
+
+function getCategoryProducts() {
+  if (currentCategoryCode === 'new') {
+    return PRODUCTS.filter(p => p.badge === 'Nouveau');
+  }
+  return PRODUCTS.filter(p => p.categorie_code === currentCategoryCode);
+}
+
+function renderCategoryProducts() {
+  const grid = document.querySelector('.js-category-grid');
+  if (!grid) return;
+
+  const searchInput = document.querySelector('.js-category-search');
+  const searchQuery = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+  // Get all products for this category
+  let products = getCategoryProducts();
+
+  // Apply search filter within category if the user modified the search
+  if (searchQuery && searchQuery !== currentCategoryName.toLowerCase()) {
+    products = products.filter(p =>
+      p.libelle_produit.toLowerCase().includes(searchQuery) ||
+      p.description_produit.toLowerCase().includes(searchQuery)
+    );
+  }
+
+  // Update count badge
+  const bannerCount = document.querySelector('.js-category-banner-count');
+  if (bannerCount) bannerCount.textContent = `${products.length} produit${products.length > 1 ? 's' : ''}`;
+
+  if (products.length === 0) {
+    grid.innerHTML = `
+      <div class="category-fullscreen__empty">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <h3>Aucun produit trouvé</h3>
+        <p style="margin-top: 8px;">Essayez un autre terme de recherche.</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = products.map(prod => renderProductCard(prod)).join('');
+
+  // Bind click events on cards inside the modal
+  grid.querySelectorAll('.js-open-detail').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const code = e.target.closest('.product-card').getAttribute('data-code');
+      openProductModal(code);
+    });
+  });
+
+  grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const code = e.target.closest('.product-card').getAttribute('data-code');
+      addToCart(code);
+    });
+  });
+
+  grid.querySelectorAll('.js-favorite').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.currentTarget.classList.toggle('active');
+      const isActive = e.currentTarget.classList.contains('active');
+      showToast(isActive ? 'Ajouté aux favoris' : 'Retiré des favoris', 'info');
     });
   });
 }
