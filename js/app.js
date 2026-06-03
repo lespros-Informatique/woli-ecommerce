@@ -411,12 +411,13 @@ function renderProducts() {
       });
     });
 
-    grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
+grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const code = e.target.closest('.product-card').getAttribute('data-code');
-        addToCart(code);
+        addToCart(code, e.currentTarget);
       });
     });
+
 
     grid.querySelectorAll('.js-favorite').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -600,9 +601,31 @@ function initCart() {
   updateCartUI();
 }
 
-function addToCart(code) {
+function addToCart(code, btnEl = null) {
+  // UI loader on ALL relevant "Ajouter au panier" buttons
+  if (btnEl) {
+    btnEl.classList.add('btn-loading');
+    btnEl.disabled = true;
+
+    // Store previous HTML only once per click
+    if (!btnEl.getAttribute('data-prev-html')) {
+      btnEl.setAttribute('data-prev-html', btnEl.innerHTML);
+    }
+  }
+
   const product = PRODUCTS.find(p => p.code_produit === code);
-  if (!product || product.statut_stock_produit === 'rupture') return;
+
+  if (!product || product.statut_stock_produit === 'rupture') {
+    if (btnEl) {
+      btnEl.classList.remove('btn-loading');
+      btnEl.disabled = false;
+      const prev = btnEl.getAttribute('data-prev-html');
+      if (prev) btnEl.innerHTML = prev;
+      btnEl.removeAttribute('data-prev-html');
+    }
+    return;
+  }
+
 
   const existing = cart.find(item => item.code === code);
   if (existing) {
@@ -618,8 +641,20 @@ function addToCart(code) {
   const cartDrawer = document.querySelector('.js-cart-drawer');
   if (cartDrawer) cartDrawer.classList.add('cart-drawer--show');
 
+  // Stop loader after a short delay for visual feedback
+  if (btnEl) {
+    setTimeout(() => {
+      btnEl.classList.remove('btn-loading');
+      btnEl.disabled = false;
+      const prev = btnEl.getAttribute('data-prev-html');
+      if (prev) btnEl.innerHTML = prev;
+      btnEl.removeAttribute('data-prev-html');
+    }, 600);
+  }
+
   showToast(`${product.libelle_produit} ajouté au panier`, 'success');
 }
+
 
 function removeFromCart(code) {
   cart = cart.filter(item => item.code !== code);
@@ -806,10 +841,11 @@ function openProductModal(code) {
   overlay.classList.add('modal-overlay--show');
 
   // Bind add button
-  body.querySelector('.js-modal-add-to-cart').addEventListener('click', () => {
-    addToCart(prod.code_produit);
+  body.querySelector('.js-modal-add-to-cart').addEventListener('click', (e) => {
+    addToCart(prod.code_produit, e.currentTarget);
     overlay.classList.remove('modal-overlay--show');
   });
+
 }
 
 // ================================================================================
@@ -1173,9 +1209,10 @@ function renderCategoryProducts() {
   grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const code = e.target.closest('.product-card').getAttribute('data-code');
-      addToCart(code);
+      addToCart(code, e.currentTarget);
     });
   });
+
 
   grid.querySelectorAll('.js-favorite').forEach(btn => {
     btn.addEventListener('click', (e) => {
