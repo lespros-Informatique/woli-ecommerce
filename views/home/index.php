@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Découvrez Woli, votre plateforme e-commerce moderne en Afrique de l'Ouest. Profitez de nos offres exclusives, livraison rapide et paiements sécurisés.">
-  <title>Woli | Template E-Commerce Moderne 2025</title>
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/web.css" media="screen and (min-width: 1024px)">
-  <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px) and (max-width: 1023px)">
-  <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 767px)">
+<?php require_once '../public/inc/header.php'; ?>
 
-  <!-- Scripts -->
-  <script src="js/app.js" defer></script>
-</head>
-<body>
 
   <!-- Accessibilité: Lien d'évitement -->
   <a href="#main-content" class="skip-link">Passer au contenu principal</a>
@@ -35,7 +19,7 @@
     <div class="container navbar__container">
       <!-- Logo -->
       <a href="#" class="navbar__logo-link" aria-label="Woli Accueil">
-        <img src="assets/images/woli.png" alt="Woli Logo" class="navbar__logo">
+        <img src="<?= RACINE ?>assets/images/logo/woli.png" alt="Woli Logo" class="navbar__logo">
       </a>
 
       <!-- Navigation Centrale -->
@@ -98,7 +82,7 @@
      ================================================================================ -->
   <header class="mobile-header mobile-only" id="mobile-header">
     <a href="#" class="mobile-header__logo-link">
-      <img src="assets/images/woli.png" alt="Woli Logo" class="mobile-header__logo">
+      <img src="<?= RACINE ?>assets/images/logo/woli.png" alt="Woli Logo" class="mobile-header__logo">
     </a>
 
     <div style="display: flex; align-items: center; gap: 8px;">
@@ -327,7 +311,7 @@
       <div class="footer-grid">
         <!-- Logo and info -->
         <div class="footer-col">
-          <img src="assets/images/woli.png" alt="Woli Logo" class="footer-col__logo">
+          <img src="<?= RACINE ?>assets/images/logo/woli.png" alt="Woli Logo" class="footer-col__logo">
           <p class="footer-col__text">Woli est la plateforme de référence pour des achats sécurisés, connectant directement les consommateurs aux meilleurs fournisseurs locaux.</p>
           <div class="footer-col__socials">
             <a href="#" class="footer-col__social-link" aria-label="Woli sur Facebook">FB</a>
@@ -792,5 +776,6 @@
   <!-- Toast Notification Container -->
   <div class="toast-container js-toast-container" id="toast-container" aria-live="polite"></div>
 
-</body>
-</html>
+
+  <!-- end client section -->
+  <?php require_once '../public/inc/footer.php'; ?>
