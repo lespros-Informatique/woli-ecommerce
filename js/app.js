@@ -125,6 +125,7 @@ const PRODUCTS = [
 
 // --- APP STATE ---
 let cart = JSON.parse(localStorage.getItem('woli_cart')) || [];
+const favorites = new Set();
 let activeFilters = {
   search: '',
   categories: [],
@@ -442,13 +443,19 @@ function bindProductGridEvents(grid) {
     });
   });
 
-  grid.querySelectorAll('.js-favorite').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.currentTarget.classList.toggle('active');
-      const isActive = e.currentTarget.classList.contains('active');
-      showToast(isActive ? 'Ajouté aux favoris' : 'Retiré des favoris', 'info');
-    });
-  });
+grid.querySelectorAll('.js-favorite').forEach(btn => {
+     btn.addEventListener('click', (e) => {
+       const productCard = e.currentTarget.closest('.product-card');
+       const code = productCard.getAttribute('data-code');
+       const isActive = e.currentTarget.classList.toggle('active');
+       if (isActive) {
+         favorites.add(code);
+       } else {
+         favorites.delete(code);
+       }
+       showToast(isActive ? 'Ajouté aux favoris' : 'Retiré des favoris', 'info');
+     });
+   });
 }
 
 // ================================================================================
@@ -1138,18 +1145,90 @@ function openCategoryFullscreen(catCode, catName, catImg) {
 }
 
 function closeCategoryFullscreen() {
-  const modal = document.querySelector('.js-category-fullscreen');
-  if (!modal) return;
+   const modal = document.querySelector('.js-category-fullscreen');
+   if (!modal) return;
 
-  modal.classList.remove('category-fullscreen--open');
-  document.body.classList.remove('category-open');
+   modal.classList.remove('category-fullscreen--open');
+   document.body.classList.remove('category-open');
 
-  // Clean up popstate listener
-  window.removeEventListener('popstate', handleCategoryPopState);
+   // Clean up popstate listener
+   window.removeEventListener('popstate', handleCategoryPopState);
 
-  currentCategoryCode = null;
-  currentCategoryName = '';
-  currentCategoryImg = '';
+   currentCategoryCode = null;
+   currentCategoryName = '';
+   currentCategoryImg = '';
+}
+
+function openCategoriesExplorerFullscreen() {
+   const modal = document.querySelector('.js-categories-explorer-fullscreen');
+   if (!modal) return;
+
+   modal.classList.add('category-fullscreen--open');
+   document.body.classList.add('category-open');
+
+   history.pushState({ categoriesExplorerOpen: true }, '', '');
+   window.addEventListener('popstate', handleCategoriesExplorerPopState);
+}
+
+function closeCategoriesExplorerFullscreen() {
+   const modal = document.querySelector('.js-categories-explorer-fullscreen');
+   if (!modal) return;
+
+   modal.classList.remove('category-fullscreen--open');
+   document.body.classList.remove('category-open');
+
+   window.removeEventListener('popstate', handleCategoriesExplorerPopState);
+}
+
+function handleCategoriesExplorerPopState(e) {
+   const modal = document.querySelector('.js-categories-explorer-fullscreen');
+   if (modal && modal.classList.contains('category-fullscreen--open')) {
+     closeCategoriesExplorerFullscreen();
+   }
+}
+
+function openFavoritesFullscreen() {
+   const modal = document.querySelector('.js-favorites-fullscreen');
+   const grid = document.querySelector('.js-favorites-grid');
+   if (!modal || !grid) return;
+
+   const favoritedProducts = PRODUCTS.filter(p => favorites.has(p.code_produit));
+
+   if (favoritedProducts.length === 0) {
+     grid.innerHTML = `
+       <div class="category-fullscreen__empty">
+         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+         <h3>Aucun favori</h3>
+         <p style="margin-top: 8px;">Vous n'avez pas encore ajouté de produits à vos favoris.</p>
+       </div>
+     `;
+   } else {
+     grid.innerHTML = favoritedProducts.map(prod => renderProductCard(prod)).join('');
+     bindProductGridEvents(grid);
+   }
+
+   modal.classList.add('category-fullscreen--open');
+   document.body.classList.add('category-open');
+
+   history.pushState({ favoritesOpen: true }, '', '');
+   window.addEventListener('popstate', handleFavoritesPopState);
+}
+
+function closeFavoritesFullscreen() {
+   const modal = document.querySelector('.js-favorites-fullscreen');
+   if (!modal) return;
+
+   modal.classList.remove('category-fullscreen--open');
+   document.body.classList.remove('category-open');
+
+   window.removeEventListener('popstate', handleFavoritesPopState);
+}
+
+function handleFavoritesPopState(e) {
+   const modal = document.querySelector('.js-favorites-fullscreen');
+   if (modal && modal.classList.contains('category-fullscreen--open')) {
+     closeFavoritesFullscreen();
+   }
 }
 
 function openProductFullscreen(code) {
