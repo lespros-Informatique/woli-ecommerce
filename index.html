@@ -42,25 +42,25 @@
       <nav aria-label="Navigation principale">
         <ul class="navbar__nav">
           <li class="navbar__item">
-            <a href="#" class="navbar__link">Accueil</a>
+            <a href="#" class="navbar__link" onclick="activeFilters={search:'',categories:[],minPrice:0,maxPrice:50000,stock:'all',suppliers:[],badge:''}; renderProducts(); return false;">Accueil</a>
           </li>
           <li class="navbar__item">
-            <a href="#" class="navbar__link">
+            <a href="#" class="navbar__link" onclick="openCategoriesExplorerFullscreen(); return false;">
               Boutique
               <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
             </a>
             <ul class="navbar__dropdown">
-              <li class="navbar__dropdown-item"><a href="#" onclick="activeFilters.categories=['CAT01']; renderProducts();">Électronique</a></li>
-              <li class="navbar__dropdown-item"><a href="#" onclick="activeFilters.categories=['CAT02']; renderProducts();">Vêtements & Mode</a></li>
-              <li class="navbar__dropdown-item"><a href="#" onclick="activeFilters.categories=['CAT03']; renderProducts();">Maison & Déco</a></li>
-              <li class="navbar__dropdown-item"><a href="#" onclick="activeFilters.categories=['CAT04']; renderProducts();">Cosmétique & Beauté</a></li>
+              <li class="navbar__dropdown-item"><a href="#" onclick="openCategoryFullscreen('CAT01', 'Électronique', ''); return false;">Électronique</a></li>
+              <li class="navbar__dropdown-item"><a href="#" onclick="openCategoryFullscreen('CAT02', 'Vêtements & Mode', ''); return false;">Vêtements & Mode</a></li>
+              <li class="navbar__dropdown-item"><a href="#" onclick="openCategoryFullscreen('CAT03', 'Maison & Déco', ''); return false;">Maison & Déco</a></li>
+              <li class="navbar__dropdown-item"><a href="#" onclick="openCategoryFullscreen('CAT04', 'Cosmétique & Beauté', ''); return false;">Cosmétique & Beauté</a></li>
             </ul>
           </li>
           <li class="navbar__item">
-            <a href="#" class="navbar__link">Nouveautés</a>
+            <a href="#" class="navbar__link" onclick="openCategoryFullscreen('new', 'Nouveautés', ''); return false;">Nouveautés</a>
           </li>
           <li class="navbar__item">
-            <a href="#" class="navbar__link">Promotions</a>
+            <a href="#" class="navbar__link" onclick="openCategoryFullscreen('promo', 'Promotions', ''); return false;">Promotions</a>
           </li>
         </ul>
       </nav>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Favoris -->
-        <button class="btn-icon" aria-label="Voir les favoris" onclick="showToast('Favoris ouverts (simulation)', 'info')">
+        <button class="btn-icon" aria-label="Voir les favoris" onclick="openFavoritesFullscreen(); return false;">
           <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
         </button>
 
@@ -86,7 +86,7 @@
         </button>
 
         <!-- Profil -->
-        <button class="btn-icon" aria-label="Mon compte" onclick="showToast('Profil utilisateur (simulation)', 'info')">
+        <button class="btn-icon" aria-label="Mon compte" onclick="openAccountFullscreen(); return false;">
           <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
         </button>
       </div>
@@ -126,7 +126,7 @@
   <nav class="mobile-nav js-mobile-nav mobile-only" aria-label="Navigation mobile">
     <ul class="mobile-nav__list">
       <li class="mobile-nav__item">
-        <a href="#" class="mobile-nav__link" onclick="document.querySelector('.js-hamburger').click();">Accueil</a>
+        <a href="#" class="mobile-nav__link" onclick="activeFilters={search:'',categories:[],minPrice:0,maxPrice:50000,stock:'all',suppliers:[],badge:''}; renderProducts(); document.querySelector('.js-hamburger').click(); return false;">Accueil</a>
       </li>
       <li class="mobile-nav__item">
         <a href="#" class="mobile-nav__link js-mobile-submenu-trigger">
@@ -134,23 +134,23 @@
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </a>
         <ul class="mobile-nav__submenu">
-          <li class="mobile-nav__submenu-item"><a href="#" onclick="activeFilters.categories=['CAT01']; renderProducts(); document.querySelector('.js-hamburger').click();">Électronique</a></li>
-          <li class="mobile-nav__submenu-item"><a href="#" onclick="activeFilters.categories=['CAT02']; renderProducts(); document.querySelector('.js-hamburger').click();">Vêtements & Mode</a></li>
-          <li class="mobile-nav__submenu-item"><a href="#" onclick="activeFilters.categories=['CAT03']; renderProducts(); document.querySelector('.js-hamburger').click();">Maison & Déco</a></li>
-          <li class="mobile-nav__submenu-item"><a href="#" onclick="activeFilters.categories=['CAT04']; renderProducts(); document.querySelector('.js-hamburger').click();">Cosmétique & Beauté</a></li>
+          <li class="mobile-nav__submenu-item"><a href="#" onclick="openCategoryFullscreen('CAT01', 'Électronique', ''); document.querySelector('.js-hamburger').click(); return false;">Électronique</a></li>
+          <li class="mobile-nav__submenu-item"><a href="#" onclick="openCategoryFullscreen('CAT02', 'Vêtements & Mode', ''); document.querySelector('.js-hamburger').click(); return false;">Vêtements & Mode</a></li>
+          <li class="mobile-nav__submenu-item"><a href="#" onclick="openCategoryFullscreen('CAT03', 'Maison & Déco', ''); document.querySelector('.js-hamburger').click(); return false;">Maison & Déco</a></li>
+          <li class="mobile-nav__submenu-item"><a href="#" onclick="openCategoryFullscreen('CAT04', 'Cosmétique & Beauté', ''); document.querySelector('.js-hamburger').click(); return false;">Cosmétique & Beauté</a></li>
         </ul>
       </li>
       <li class="mobile-nav__item">
-        <a href="#" class="mobile-nav__link" onclick="document.querySelector('.js-hamburger').click();">Nouveautés</a>
+        <a href="#" class="mobile-nav__link" onclick="openCategoryFullscreen('new', 'Nouveautés', ''); document.querySelector('.js-hamburger').click(); return false;">Nouveautés</a>
       </li>
       <li class="mobile-nav__item">
-        <a href="#" class="mobile-nav__link" onclick="document.querySelector('.js-hamburger').click();">Promotions</a>
+        <a href="#" class="mobile-nav__link" onclick="openCategoryFullscreen('promo', 'Promotions', ''); document.querySelector('.js-hamburger').click(); return false;">Promotions</a>
       </li>
       <li class="mobile-nav__item">
-        <a href="#" class="mobile-nav__link" onclick="document.querySelector('.js-hamburger').click(); showToast('Favoris ouverts', 'info');">Mes Favoris</a>
+        <a href="#" class="mobile-nav__link" onclick="openFavoritesFullscreen(); document.querySelector('.js-hamburger').click(); return false;">Mes Favoris</a>
       </li>
       <li class="mobile-nav__item">
-        <a href="#" class="mobile-nav__link" onclick="document.querySelector('.js-hamburger').click(); showToast('Profil ouvert', 'info');">Mon Compte</a>
+        <a href="#" class="mobile-nav__link" onclick="openAccountFullscreen(); document.querySelector('.js-hamburger').click(); return false;">Mon Compte</a>
       </li>
     </ul>
   </nav>
@@ -392,19 +392,19 @@
      == MOBILE BOTTOM APP BAR (Sticky Footer) ==
      ================================================================================ -->
   <nav class="bottom-navbar mobile-only" aria-label="Menu de navigation mobile rapide">
-    <a href="#" class="bottom-navbar__item bottom-navbar__item--active" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); activeFilters={search:'',categories:[],minPrice:0,maxPrice:50000,stock:'all',suppliers:[]}; renderProducts();">
+    <a href="#" class="bottom-navbar__item bottom-navbar__item--active" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); activeFilters={search:'',categories:[],minPrice:0,maxPrice:50000,stock:'all',suppliers:[]}; renderProducts(); return false;">
       <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
       <span>Accueil</span>
     </a>
-    <a href="#" class="bottom-navbar__item" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); document.querySelector('.js-filter-trigger').click();">
-      <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-      <span>Filtres</span>
+    <a href="#" class="bottom-navbar__item" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); openCategoriesExplorerFullscreen(); return false;">
+      <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V7a2 2 0 00-2-2H7a2 2 0 00-2 2v4"></path></svg>
+      <span>Catégories</span>
     </a>
-    <a href="#" class="bottom-navbar__item" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); document.querySelector('.js-search-trigger').click();">
+    <a href="#" class="bottom-navbar__item" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); document.querySelector('.js-search-trigger').click(); return false;">
       <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       <span>Rechercher</span>
     </a>
-    <a href="#" class="bottom-navbar__item" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); showToast('Favoris (simulation)', 'info');">
+    <a href="#" class="bottom-navbar__item" onclick="document.querySelectorAll('.bottom-navbar__item').forEach(el=>el.classList.remove('bottom-navbar__item--active')); this.classList.add('bottom-navbar__item--active'); openFavoritesFullscreen(); return false;">
       <svg class="bottom-navbar__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
       <span>Favoris</span>
     </a>
@@ -623,6 +623,144 @@
     <!-- Products Grid -->
     <div class="category-fullscreen__body">
       <div class="category-fullscreen__grid js-category-grid" id="category-grid"></div>
+    </div>
+  </div>
+
+
+  <!-- ================================================================================
+     == ACCOUNT FULLSCREEN MODAL (Alibaba-style) ==
+     ================================================================================ -->
+  <div class="category-fullscreen js-account-fullscreen" id="account-fullscreen" aria-label="Mon Compte">
+    <!-- Sticky Header with back arrow -->
+    <div class="category-fullscreen__header" style="justify-content: flex-start; gap: 16px;">
+      <button class="category-fullscreen__back js-account-back" aria-label="Retour" onclick="closeAccountFullscreen()" style="position: static; margin-right: 0;">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <div style="font-family: var(--font-title); font-size: 18px; font-weight: 700; color: var(--primary-color);">Mon Compte</div>
+    </div>
+
+    <div class="category-fullscreen__body" style="padding-top: 72px;">
+      <!-- Profile section -->
+      <div style="background: #FFFFFF; border-radius: 12px; padding: var(--space-lg); box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-md);">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background-color: var(--secondary-color); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; font-family: var(--font-title);">
+          JK
+        </div>
+        <div>
+          <h3 style="font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 4px;">Jean Koffi</h3>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 2px;">jean.koffi@email.com</p>
+          <p style="font-size: 14px; color: var(--text-secondary);">+225 07 08 09 10 11</p>
+        </div>
+      </div>
+
+      <!-- Orders Section -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-family: var(--font-title); font-size: 16px; font-weight: 700; color: var(--primary-color); margin-bottom: var(--space-md);">Mes Dernières Commandes</h3>
+        <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+          <!-- Order Card 1 -->
+          <div style="background: #FFFFFF; border-radius: 12px; padding: var(--space-md); box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E5E7EB;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm); border-bottom: 1px solid #F3F4F6; padding-bottom: 8px;">
+              <span style="font-family: var(--font-mono); font-weight: 700; color: var(--secondary-color);">CMD-4521</span>
+              <span style="background-color: rgba(255, 107, 0, 0.1); color: var(--secondary-color); padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">En livraison</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-secondary);">
+              <span>12 mai 2026</span>
+              <span style="font-weight: 700; color: var(--primary-color);">45 200 FCFA</span>
+            </div>
+          </div>
+          <!-- Order Card 2 -->
+          <div style="background: #FFFFFF; border-radius: 12px; padding: var(--space-md); box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E5E7EB;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm); border-bottom: 1px solid #F3F4F6; padding-bottom: 8px;">
+              <span style="font-family: var(--font-mono); font-weight: 700; color: var(--secondary-color);">CMD-4489</span>
+              <span style="background-color: rgba(16, 185, 129, 0.1); color: var(--color-success); padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">Livrée</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-secondary);">
+              <span>28 avril 2026</span>
+              <span style="font-weight: 700; color: var(--primary-color);">18 500 FCFA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Links -->
+      <div style="background: #FFFFFF; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: var(--space-lg); border: 1px solid #E5E7EB;">
+        <div style="padding: 16px; border-bottom: 1px solid #F3F4F6; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="showToast('Carnet d\'adresses (simulation)', 'info')">
+          <span style="font-weight: 500; font-size: 15px;">Mes Adresses de livraison</span>
+          <span style="color: var(--text-muted);">›</span>
+        </div>
+        <div style="padding: 16px; border-bottom: 1px solid #F3F4F6; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="showToast('Moyens de paiement (simulation)', 'info')">
+          <span style="font-weight: 500; font-size: 15px;">Moyens de paiement</span>
+          <span style="color: var(--text-muted);">›</span>
+        </div>
+        <a href="auth.html" style="padding: 16px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--color-error); font-weight: 600;">
+          <span>Déconnexion</span>
+          <span>›</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================================
+     == FAVORITES FULLSCREEN MODAL (Alibaba-style) ==
+     ================================================================================ -->
+  <div class="category-fullscreen js-favorites-fullscreen" id="favorites-fullscreen" aria-label="Mes Favoris">
+    <!-- Sticky Header with back arrow -->
+    <div class="category-fullscreen__header" style="justify-content: flex-start; gap: 16px;">
+      <button class="category-fullscreen__back js-favorites-back" aria-label="Retour" onclick="closeFavoritesFullscreen()" style="position: static; margin-right: 0;">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <div style="font-family: var(--font-title); font-size: 18px; font-weight: 700; color: var(--primary-color);">Mes Favoris</div>
+    </div>
+
+    <div class="category-fullscreen__body" style="padding-top: 72px;">
+      <div class="category-fullscreen__grid js-favorites-grid" id="favorites-grid">
+        <!-- Filled dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================================
+     == CATEGORIES EXPLORER FULLSCREEN MODAL (Alibaba-style) ==
+     ================================================================================ -->
+  <div class="category-fullscreen js-categories-explorer-fullscreen" id="categories-explorer-fullscreen" aria-label="Explorer les catégories">
+    <!-- Sticky Header with back arrow -->
+    <div class="category-fullscreen__header" style="justify-content: flex-start; gap: 16px;">
+      <button class="category-fullscreen__back js-categories-explorer-back" aria-label="Retour" onclick="closeCategoriesExplorerFullscreen()" style="position: static; margin-right: 0;">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <div style="font-family: var(--font-title); font-size: 18px; font-weight: 700; color: var(--primary-color);">Toutes les Catégories</div>
+    </div>
+
+    <div class="category-fullscreen__body" style="padding-top: 72px;">
+      <div class="categories-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); margin-top: var(--space-md);">
+        <!-- Electronic Card -->
+        <div class="category-card" onclick="closeCategoriesExplorerFullscreen(); openCategoryFullscreen('CAT01', 'Électronique', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500')">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Électronique" class="category-card__image">
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">Électronique</h3>
+          </div>
+        </div>
+        <!-- Vêtements Card -->
+        <div class="category-card" onclick="closeCategoriesExplorerFullscreen(); openCategoryFullscreen('CAT02', 'Vêtements & Mode', 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500')">
+          <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500" alt="Vêtements" class="category-card__image">
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">Vêtements</h3>
+          </div>
+        </div>
+        <!-- Maison Card -->
+        <div class="category-card" onclick="closeCategoriesExplorerFullscreen(); openCategoryFullscreen('CAT03', 'Maison & Déco', 'https://images.unsplash.com/photo-1517256064527-09c53b2d0bc6?w=500')">
+          <img src="https://images.unsplash.com/photo-1517256064527-09c53b2d0bc6?w=500" alt="Maison" class="category-card__image">
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">Maison</h3>
+          </div>
+        </div>
+        <!-- Beauté Card -->
+        <div class="category-card" onclick="closeCategoriesExplorerFullscreen(); openCategoryFullscreen('CAT04', 'Cosmétique & Beauté', 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=500')">
+          <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500" alt="Beauté" class="category-card__image">
+          <div class="category-card__overlay">
+            <h3 class="category-card__title">Beauté</h3>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
