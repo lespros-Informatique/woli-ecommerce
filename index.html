@@ -219,24 +219,104 @@
 <!-- ================================================================================
       == RECOMMENDED PRODUCTS SECTION ==
       ================================================================================ -->
-  <main class="container section" id="main-content">
+  <main class="container section " id="main-content">
   <section class="products-section section" id="recommended-section">
     <div class="container">
       <div class="products-section__header">
         <h2 class="section-title">Recommandés</h2>
-        <div class="products-filter-tabs">
-          <button class="products-filter-tab active" data-filter="all">Tous</button>
-          <button class="products-filter-tab" data-filter="Nouveau">Nouveautés</button>
-          <button class="products-filter-tab" data-filter="Best-Seller">Tendances</button>
-          <button class="products-filter-tab" data-filter="Promo">Promos</button>
+        <div class="products-header-controls">
+          <div class="products-filter-tabs">
+            <button class="products-filter-tab active" data-filter="all">Tous</button>
+            <button class="products-filter-tab" data-filter="Nouveau">Nouveautés</button>
+            <button class="products-filter-tab" data-filter="Best-Seller">Tendances</button>
+            <button class="products-filter-tab" data-filter="Promo">Promos</button>
+          </div>
+          <button class="btn-filter js-filter-trigger" aria-label="Filtrer les produits">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+            </svg>
+            <span>Filtrer</span>
+          </button>
         </div>
       </div>
       <div class="product-grid js-product-grid" id="product-grid-container"></div>
     </div>
   </section>
 
-  <!-- Backdrop for mobile drawer -->
-  <div class="sidebar-backdrop js-sidebar-backdrop"></div>
+  <!-- Sidebar Backdrop & Sidebar Drawer -->
+  <div class="sidebar-backdrop js-sidebar-backdrop index-page-backdrop"></div>
+  
+  <aside class="sidebar js-sidebar sidebar--drawer" aria-label="Filtres">
+    <div class="sidebar__header">
+      <h2 class="sidebar__title" style="font-size: 20px; font-weight: 700; margin-bottom: 0;">Filtres</h2>
+      <button class="sidebar__close-btn js-close-filter" aria-label="Fermer">×</button>
+    </div>
+    <div class="sidebar__content">
+      <!-- Section Prix -->
+      <div class="sidebar__section">
+        <h3 class="sidebar__title" style="font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--primary-color);">Prix</h3>
+        <div class="range-container">
+          <div class="range-inputs">
+            <input type="number" class="js-min-price-input" value="1000" readonly>
+            <span style="color:var(--text-muted);">à</span>
+            <input type="number" class="js-max-price-input" value="50000" readonly>
+          </div>
+          <input type="range" min="1000" max="50000" step="1000" value="50000" class="range-slider js-range-slider">
+          <span class="range-label js-range-label">1 000 - 50 000 FCFA</span>
+        </div>
+      </div>
+      
+      <!-- Section Catégories -->
+      <div class="sidebar__section">
+        <h3 class="sidebar__title" style="font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--primary-color);">Catégories</h3>
+        <ul class="filter-list">
+          <li class="filter-item">
+            <label><input type="checkbox" class="js-cat-filter" value="CAT01"> Électronique</label>
+          </li>
+          <li class="filter-item">
+            <label><input type="checkbox" class="js-cat-filter" value="CAT02"> Vêtements & Mode</label>
+          </li>
+          <li class="filter-item">
+            <label><input type="checkbox" class="js-cat-filter" value="CAT03"> Maison & Déco</label>
+          </li>
+          <li class="filter-item">
+            <label><input type="checkbox" class="js-cat-filter" value="CAT04"> Cosmétique & Beauté</label>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Section Fournisseurs -->
+      <div class="sidebar__section">
+        <h3 class="sidebar__title" style="font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--primary-color);">Fournisseurs</h3>
+        <ul class="filter-list">
+          <li class="filter-item">
+            <label><input type="checkbox" class="js-sup-filter" value="FOU01"> Afrimarket Sarl</label>
+          </li>
+          <li class="filter-item">
+            <label><input type="checkbox" class="js-sup-filter" value="FOU02"> Sahel Import</label>
+          </li>
+          <li class="filter-item">
+            <label><input type="checkbox" class="js-sup-filter" value="FOU03"> Babi Mode</label>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Section Stock -->
+      <div class="sidebar__section">
+        <h3 class="sidebar__title" style="font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--primary-color);">Stock</h3>
+        <ul class="filter-list">
+          <li class="filter-item"><label><input type="radio" name="filter-stock" value="all" checked> Tous</label></li>
+          <li class="filter-item"><label><input type="radio" name="filter-stock" value="disponible"> En stock</label></li>
+          <li class="filter-item"><label><input type="radio" name="filter-stock" value="faible"> Dernières pièces</label></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar__actions">
+        <button class="btn btn-primary js-apply-filters" style="width: 100%; min-height: 44px; padding: 12px;">Appliquer</button>
+        <button class="btn btn-secondary js-reset-filters" style="width: 100%; min-height: 44px; padding: 12px; margin-top: 8px;">Réinitialiser</button>
+      </div>
+    </div>
+  </aside>
 </main>
 
   <!-- ================================================================================
@@ -511,6 +591,38 @@
 
         <button class="btn btn-primary" style="width:100%;" onclick="closeCheckoutModal()">Retourner à la boutique</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ================================================================================
+     == CATEGORY FULLSCREEN MODAL (Alibaba-style mobile page) ==
+     ================================================================================ -->
+  <div class="category-fullscreen js-category-fullscreen" id="category-fullscreen" aria-label="Explorer la catégorie">
+    <!-- Sticky Header with back arrow + search -->
+    <div class="category-fullscreen__header">
+      <button class="category-fullscreen__back js-category-back" aria-label="Retour">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <div class="category-fullscreen__search-wrapper">
+        <svg class="category-fullscreen__search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input type="text" class="category-fullscreen__search js-category-search" id="category-search-input" placeholder="Rechercher dans cette catégorie..." aria-label="Rechercher dans la catégorie">
+      </div>
+    </div>
+
+    <!-- Category Info Banner -->
+    <div class="category-fullscreen__banner js-category-banner">
+      <div class="category-fullscreen__banner-overlay"></div>
+      <img src="" alt="" class="category-fullscreen__banner-img js-category-banner-img">
+      <div class="category-fullscreen__banner-content">
+        <h2 class="category-fullscreen__banner-title js-category-banner-title"></h2>
+        <p class="category-fullscreen__banner-desc js-category-banner-desc"></p>
+        <span class="category-fullscreen__banner-count js-category-banner-count"></span>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="category-fullscreen__body">
+      <div class="category-fullscreen__grid js-category-grid" id="category-grid"></div>
     </div>
   </div>
 

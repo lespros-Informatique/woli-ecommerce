@@ -394,10 +394,10 @@ function renderProducts() {
             <div class="product-card__stock ${stockClass}">
               <span class="stock-indicator-dot"></span> ${stockLabel}
             </div>
-            <button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
-              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-              Ajouter au panier
-            </button>
+<button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
+               <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 2H4L5 9z"></path></svg>
+               <span>Ajouter au panier</span>
+             </button>
           </div>
         </article>
       `;
@@ -692,27 +692,27 @@ function updateCartUI() {
     const totalItemPrice = price * item.quantity;
     subtotal += totalItemPrice;
 
-    itemsHtml += `
-      <div class="cart-item" data-code="${product.code_produit}">
-        <img src="${product.image_produit}" alt="${product.libelle_produit}" class="cart-item__image">
-        <div class="cart-item__details">
-          <div class="cart-item__title">${product.libelle_produit}</div>
-          <span class="cart-item__supplier">Par ${FOURNISSEURS[product.fournisseur_code].nom}</span>
-          <div class="cart-item__controls">
-            <div class="quantity-selector">
-              <button class="quantity-btn js-qty-dec">-</button>
-              <input type="text" class="quantity-input" value="${item.quantity}" readonly>
-              <button class="quantity-btn js-qty-inc">+</button>
-            </div>
-            <button class="cart-item__remove js-qty-remove">
-              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-              Retirer
-            </button>
-          </div>
-        </div>
-        <div class="price" style="font-size: 14px; margin-left: 8px;">${formatPrice(totalItemPrice)}</div>
-      </div>
-    `;
+itemsHtml += `
+       <div class="cart-item" data-code="${product.code_produit}">
+         <img src="${product.image_produit}" alt="${product.libelle_produit}" class="cart-item__image">
+         <div class="cart-item__details">
+           <div class="cart-item__title">${product.libelle_produit}</div>
+           <span class="cart-item__supplier">Par ${FOURNISSEURS[product.fournisseur_code].nom}</span>
+           <div class="cart-item__controls">
+             <div class="quantity-selector">
+               <button class="quantity-btn js-qty-dec">-</button>
+               <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+               <button class="quantity-btn js-qty-inc">+</button>
+             </div>
+             <button class="cart-item__remove js-qty-remove">
+               <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+               <span>Retirer</span>
+             </button>
+           </div>
+         </div>
+         <div class="price" style="font-size: 14px; margin-left: 8px;">${formatPrice(totalItemPrice)}</div>
+       </div>
+     `;
   });
 
   if (itemsContainer) {
@@ -794,10 +794,10 @@ function openProductModal(code) {
           <div style="margin-bottom: 6px;"><strong>Fournisseur :</strong> ${supplier.nom} (${supplier.local})</div>
           <div style="margin-bottom: 12px;"><strong>Mode logistique :</strong> ${supplier.type === 'Dropshipping' ? 'Dropshipping Direct' : 'Expédié par Woli'}</div>
           
-          <button class="btn btn-primary js-modal-add-to-cart" style="width:100%;" ${prod.statut_stock_produit === 'rupture' ? 'disabled' : ''}>
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-            Ajouter au panier
-          </button>
+<button class="btn btn-primary js-modal-add-to-cart" style="width:100%;" ${prod.statut_stock_produit === 'rupture' ? 'disabled' : ''}>
+             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+             <span>Ajouter au panier</span>
+           </button>
         </div>
       </div>
     </div>
@@ -997,40 +997,191 @@ function initProductTabs() {
     });
   });
   
+  // Category cards now open the fullscreen category modal
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      
       const cat = chip.getAttribute('data-cat');
-      if (chip.classList.contains('category-card-small')) {
-        // C'est une carte catégorie petite
-        if (cat === 'all') {
-          activeFilters.categories = [];
-        } else if (cat === 'new') {
-          const filtered = PRODUCTS.filter(p => p.badge === 'Nouveau');
-          renderFilteredProducts(filtered);
-          return;
-        } else {
-          activeFilters.categories = [cat];
-        }
-      } else {
-        // C'est un chip
-        if (cat === 'all') {
-          activeFilters.categories = [];
-        } else if (cat === 'new') {
-          const filtered = PRODUCTS.filter(p => p.badge === 'Nouveau');
-          renderFilteredProducts(filtered);
-          return;
-        } else if (cat === 'Promo') {
-          const filtered = PRODUCTS.filter(p => p.badge === 'Promo');
-          renderFilteredProducts(filtered);
-          return;
-        } else {
-          activeFilters.categories = [cat];
-        }
-      }
-      renderProducts();
+      const label = chip.querySelector('.category-card-small__label');
+      const img = chip.querySelector('.category-card-small__image');
+      const catName = label ? label.textContent.trim() : '';
+      const catImg = img ? img.src : '';
+      
+      openCategoryFullscreen(cat, catName, catImg);
+    });
+  });
+
+  // Init category fullscreen back button & search
+  const backBtn = document.querySelector('.js-category-back');
+  if (backBtn) {
+    backBtn.addEventListener('click', closeCategoryFullscreen);
+  }
+
+  const categorySearch = document.querySelector('.js-category-search');
+  if (categorySearch) {
+    let debounceTimer;
+    categorySearch.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        renderCategoryProducts();
+      }, 250);
+    });
+  }
+}
+
+// --- Current category context for the fullscreen modal ---
+let currentCategoryCode = null;
+let currentCategoryName = '';
+let currentCategoryImg = '';
+
+// Category banner images mapped to codes
+const CATEGORY_BANNER_IMAGES = {
+  'CAT01': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80',
+  'CAT02': 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&auto=format&fit=crop&q=80',
+  'CAT03': 'https://images.unsplash.com/photo-1517256064527-09c53b2d0bc6?w=800&auto=format&fit=crop&q=80',
+  'CAT04': 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80',
+  'new':   'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80'
+};
+
+function openCategoryFullscreen(catCode, catName, catImg) {
+  currentCategoryCode = catCode;
+  currentCategoryName = catName;
+  currentCategoryImg = catImg;
+
+  const modal = document.querySelector('.js-category-fullscreen');
+  const searchInput = document.querySelector('.js-category-search');
+  const bannerImg = document.querySelector('.js-category-banner-img');
+  const bannerTitle = document.querySelector('.js-category-banner-title');
+  const bannerDesc = document.querySelector('.js-category-banner-desc');
+  const bannerCount = document.querySelector('.js-category-banner-count');
+
+  if (!modal) return;
+
+  // Pre-fill search with category name
+  if (searchInput) {
+    searchInput.value = catName;
+  }
+
+  // Set banner
+  const bannerSrc = CATEGORY_BANNER_IMAGES[catCode] || catImg;
+  if (bannerImg) {
+    bannerImg.src = bannerSrc;
+    bannerImg.alt = catName;
+  }
+
+  // Set banner info
+  let catDesc = '';
+  let catLabel = catName;
+  if (catCode !== 'new' && CATEGORIES[catCode]) {
+    catDesc = CATEGORIES[catCode].desc;
+    catLabel = CATEGORIES[catCode].libelle;
+  } else if (catCode === 'new') {
+    catDesc = 'Découvrez nos dernières arrivées';
+    catLabel = 'Nouveautés';
+  }
+
+  if (bannerTitle) bannerTitle.textContent = catLabel;
+  if (bannerDesc) bannerDesc.textContent = catDesc;
+
+  // Count products
+  const products = getCategoryProducts();
+  if (bannerCount) bannerCount.textContent = `${products.length} produit${products.length > 1 ? 's' : ''}`;
+
+  // Open modal with animation
+  modal.classList.add('category-fullscreen--open');
+  document.body.classList.add('category-open');
+
+  // Render products
+  renderCategoryProducts();
+
+  // Handle back with browser history for a native feel
+  history.pushState({ categoryOpen: true }, '', '');
+  window.addEventListener('popstate', handleCategoryPopState);
+}
+
+function closeCategoryFullscreen() {
+  const modal = document.querySelector('.js-category-fullscreen');
+  if (!modal) return;
+
+  modal.classList.remove('category-fullscreen--open');
+  document.body.classList.remove('category-open');
+
+  // Clean up popstate listener
+  window.removeEventListener('popstate', handleCategoryPopState);
+
+  currentCategoryCode = null;
+  currentCategoryName = '';
+  currentCategoryImg = '';
+}
+
+function handleCategoryPopState(e) {
+  const modal = document.querySelector('.js-category-fullscreen');
+  if (modal && modal.classList.contains('category-fullscreen--open')) {
+    closeCategoryFullscreen();
+  }
+}
+
+function getCategoryProducts() {
+  if (currentCategoryCode === 'new') {
+    return PRODUCTS.filter(p => p.badge === 'Nouveau');
+  }
+  return PRODUCTS.filter(p => p.categorie_code === currentCategoryCode);
+}
+
+function renderCategoryProducts() {
+  const grid = document.querySelector('.js-category-grid');
+  if (!grid) return;
+
+  const searchInput = document.querySelector('.js-category-search');
+  const searchQuery = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+  // Get all products for this category
+  let products = getCategoryProducts();
+
+  // Apply search filter within category if the user modified the search
+  if (searchQuery && searchQuery !== currentCategoryName.toLowerCase()) {
+    products = products.filter(p =>
+      p.libelle_produit.toLowerCase().includes(searchQuery) ||
+      p.description_produit.toLowerCase().includes(searchQuery)
+    );
+  }
+
+  // Update count badge
+  const bannerCount = document.querySelector('.js-category-banner-count');
+  if (bannerCount) bannerCount.textContent = `${products.length} produit${products.length > 1 ? 's' : ''}`;
+
+  if (products.length === 0) {
+    grid.innerHTML = `
+      <div class="category-fullscreen__empty">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <h3>Aucun produit trouvé</h3>
+        <p style="margin-top: 8px;">Essayez un autre terme de recherche.</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = products.map(prod => renderProductCard(prod)).join('');
+
+  // Bind click events on cards inside the modal
+  grid.querySelectorAll('.js-open-detail').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const code = e.target.closest('.product-card').getAttribute('data-code');
+      openProductModal(code);
+    });
+  });
+
+  grid.querySelectorAll('.js-add-to-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const code = e.target.closest('.product-card').getAttribute('data-code');
+      addToCart(code);
+    });
+  });
+
+  grid.querySelectorAll('.js-favorite').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.currentTarget.classList.toggle('active');
+      const isActive = e.currentTarget.classList.contains('active');
+      showToast(isActive ? 'Ajouté aux favoris' : 'Retiré des favoris', 'info');
     });
   });
 }
@@ -1108,10 +1259,10 @@ function renderProductCard(prod) {
         <div class="product-card__stock ${stockClass}">
           <span class="stock-indicator-dot"></span> ${stockLabel}
         </div>
-        <button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          Ajouter au panier
-        </button>
+<button class="btn btn-primary product-card__btn js-add-to-cart" ${isDisabled}>
+           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+           <span>Ajouter au panier</span>
+         </button>
       </div>
     </article>
   `;
